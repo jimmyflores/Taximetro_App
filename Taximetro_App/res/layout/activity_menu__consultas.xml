@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:text="Consultas" />
+                android:text="Menú de Consultas" />
 
         </RelativeLayout>
 
@@ -58,6 +58,20 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendario" />
+
+            <Button
+                android:id="@+id/buttonbuscaxfecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onFechas"
+                android:text="Por rango de fechas" />
+
         </TableRow>
 
         <TableRow

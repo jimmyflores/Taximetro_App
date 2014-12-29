@@ -26,4 +26,9 @@ public class Menu_ConsultasActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	public void onFechas(View boton){
+		Intent intent =new Intent(this,ConsultasActivity.class);
+		startActivity(intent);
+	}
+	
 }

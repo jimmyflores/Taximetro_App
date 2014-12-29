@@ -12,25 +12,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Origen" />
-
-    <TextView
-        android:id="@+id/textViewDest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewOrig"
-        android:layout_below="@+id/textViewOrig"
-        android:layout_marginTop="19dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textViewCost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewDest"
-        android:layout_below="@+id/textViewDest"
-        android:layout_marginTop="22dp"
-        android:text="TextView" />
+        android:text="Origen:" />
 
     <TextView
         android:id="@+id/textViewOrig"
@@ -45,17 +27,33 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewCost"
         android:layout_alignLeft="@+id/textView1"
-        android:text="Destino" />
+        android:layout_below="@+id/textView1"
+        android:text="Destino:" />
+
+    <TextView
+        android:id="@+id/textViewDest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/textViewOrig"
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewCost"
-        android:layout_alignBottom="@+id/textViewCost"
         android:layout_alignLeft="@+id/textView2"
-        android:text="Costo" />
+        android:layout_below="@+id/textView2"
+        android:text="Costo:" />
+
+    <TextView
+        android:id="@+id/textViewCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewDest"
+        android:layout_below="@+id/textViewDest"
+        android:text="TextView" />
 
 </RelativeLayout>
