@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ec.edu.upse.taximetro_app.modelo.DBTaximetro;
 import ec.edu.upse.taximetro_app.utiles.CustomListViewAdapter;
-import ec.edu.upse.taximetro_app.utiles.CustomListViewAdapterConsulta;
+//import ec.edu.upse.taximetro_app.utiles.CustomListViewAdapterConsulta;
 import ec.edu.upse.taximetro_app.utiles.ItemConsulta;
 import android.os.Bundle;
 import android.app.Activity;
@@ -75,8 +75,8 @@ public class ConsultasActivity extends Activity {
 				
 		DBTaximetro dbTaximetro = new DBTaximetro();
 		ArrayList<ItemConsulta> listarCarrera = dbTaximetro.BuscarPorFecha(this,id_usuario, fecha_desde, fecha_hasta);
-		CustomListViewAdapterConsulta customAdapter = new CustomListViewAdapterConsulta(this, R.layout.activity_item__result, listarCarrera);
-		lista.setAdapter(customAdapter); 
+		//CustomListViewAdapterConsulta customAdapter = new CustomListViewAdapterConsulta(this, R.layout.activity_item__result, listarCarrera);
+		//lista.setAdapter(customAdapter); 
 		//lista.setOnItemClickListener(new ItemClickListener());
 		num_carrera.setText(" "+dbTaximetro.numero_de_carreras(this, id_usuario, fecha_desde, fecha_hasta));
 		total.setText(" $ "+dbTaximetro.valor_total(this, id_usuario, fecha_desde, fecha_hasta));
