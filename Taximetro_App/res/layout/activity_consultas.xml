@@ -67,6 +67,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/buttonBusca"
                 android:layout_width="wrap_content"
@@ -100,16 +105,16 @@
                 android:text="Ruta" />
 
             <TextView
-                android:id="@+id/textViewKM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valor" />
-
-            <TextView
                 android:id="@+id/textViewKMV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Distancia" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valor" />
 
         </TableRow>
 
@@ -136,14 +141,11 @@
                 android:layout_height="wrap_content"
                 android:text="Cantidad de carreras:" />
 
-            <EditText
-                android:id="@+id/editTextCcarreras"
+            <TextView
+                android:id="@+id/textViewNumCarreras"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10" >
-
-                <requestFocus />
-            </EditText>
+                android:text="0" />
         </TableRow>
 
         <TableRow
@@ -157,17 +159,22 @@
                 android:layout_height="wrap_content"
                 android:text="Valor total:" />
 
-            <EditText
-                android:id="@+id/editTextVtotal"
+            <TextView
+                android:id="@+id/textViewVTCarreras"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10" />
+                android:text="$ 0.00" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/buttonRegresar"

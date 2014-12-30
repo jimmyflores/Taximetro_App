@@ -5,13 +5,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class Menu_ConsultasActivity extends Activity {
 
+	String id_usuario;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu__consultas);
+		Intent intent = getIntent();
+		id_usuario = intent.getStringExtra("id_usuario_funciones");
+		Toast.makeText(this, "id_usuario_menu "+id_usuario, Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -28,6 +34,8 @@ public class Menu_ConsultasActivity extends Activity {
 	
 	public void onFechas(View boton){
 		Intent intent =new Intent(this,ConsultasActivity.class);
+		intent.putExtra("id_usuario_fechas", id_usuario);
+		Toast.makeText(this, "id_usuario_fechas "+id_usuario, Toast.LENGTH_LONG).show();
 		startActivity(intent);
 	}
 	

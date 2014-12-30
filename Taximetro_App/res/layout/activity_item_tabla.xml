@@ -9,7 +9,7 @@
     tools:context=".Item_tablaActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewNumCarreras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Origen:" />
@@ -18,25 +18,25 @@
         android:id="@+id/textViewOrig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignBaseline="@+id/textViewNumCarreras"
+        android:layout_alignBottom="@+id/textViewNumCarreras"
         android:layout_centerHorizontal="true"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewVTCarreras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/textViewNumCarreras"
+        android:layout_below="@+id/textViewNumCarreras"
         android:text="Destino:" />
 
     <TextView
         android:id="@+id/textViewDest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBaseline="@+id/textViewVTCarreras"
+        android:layout_alignBottom="@+id/textViewVTCarreras"
         android:layout_alignLeft="@+id/textViewOrig"
         android:text="TextView" />
 
@@ -44,8 +44,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textViewVTCarreras"
+        android:layout_below="@+id/textViewVTCarreras"
         android:text="Costo:" />
 
     <TextView

@@ -47,14 +47,16 @@ public class MainActivity extends Activity {
     	String Nombre = editTextUsuario.getText().toString();
     	String Clave = editTextPassword.getText().toString();
     	DBTaximetro dbTaxi = new DBTaximetro();
-    	ArrayList<ItemDeUsuario> listarTarjeta = dbTaxi.Listalogin(this, Nombre, Clave);
-    	if (listarTarjeta.size() == 0)
+    	ArrayList<ItemDeUsuario> listarusuario = dbTaxi.Listalogin(this, Nombre, Clave);
+    	if (listarusuario.size() == 0)
     	{
     		Toast.makeText(this, "Usuario o Clave incorrecta", Toast.LENGTH_LONG).show();
     	}
     	else
     	{
     		Intent intent =new Intent(this,FuncionesActivity.class);
+    		intent.putExtra("id_usuario", ""+listarusuario.get(0).getId_login());
+    		Toast.makeText(this, "ID_USUARIO "+listarusuario.get(0).getId_login(), Toast.LENGTH_LONG).show();
     		startActivity(intent);
     		Limpiar();
     		

@@ -2,39 +2,48 @@ package ec.edu.upse.taximetro_app.utiles;
 
 public class ItemConsulta {
 
-	private String Ruta;
-    private Double Valor;
+	private String Origen;
+	private String Destino;
     private Double Distancia;
+    private Double Valor;
 	
-    public ItemConsulta(String ruta, Double valor, Double distancia) {
-    	   this.Ruta = ruta;
-	        this.Valor = valor;
-	        this.Distancia = distancia;
-		
+    public ItemConsulta(String origen, String destino, Double valor, Double distancia) {
+    	this.Origen = origen;
+    	this.Destino = destino;
+    	this.Distancia = distancia;
+    	this.Valor = valor;
 	}
 
-	public String getRuta() {
-		return Ruta;
+    public String getOrigen() {
+		return Origen;
 	}
 
-	public void setRuta(String ruta) {
-		Ruta = ruta;
+	public void setOrigen(String origen) {
+		Origen = origen;
 	}
 
-	public Double getValor() {
-		return Valor;
+	public String getDestino() {
+		return Destino;
 	}
 
-	public void setValor(Double valor) {
-		Valor = valor;
+	public void setDestino(String destino) {
+		Destino = destino;
 	}
-
+	
 	public Double getDistancia() {
 		return Distancia;
 	}
 
 	public void setDistancia(Double distancia) {
 		Distancia = distancia;
+	}
+	
+	public Double getValor() {
+		return Valor;
+	}
+
+	public void setValor(Double valor) {
+		Valor = valor;
 	}
     
 }
