@@ -30,5 +30,9 @@
     <string name="title_activity_item_tabla">Item_tablaActivity</string>
     <string name="title_activity_item_tablas">ItemTablasActivity</string>
     <string name="title_activity_item_tablita">ItemTablitaActivity</string>
+    <string name="title_activity_consulta_carrera">Consulta_carrera</string>
+    <string name="title_activity_item_detalle">Item_detalle</string>
+    <string name="partida_">Partida:</string>
+    <string name="llegada_">LLegada:</string>
 
 </resources>

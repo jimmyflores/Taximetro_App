@@ -136,17 +136,6 @@ public class SqlTaximetro extends SQLiteOpenHelper {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	@Override

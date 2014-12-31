@@ -155,12 +155,16 @@
                 android:id="@+id/TextView02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Partida:" />
+                android:text="@string/partida_" />
 
-            <TextView
-                android:id="@+id/textViewPartid"
+            <EditText
+                android:id="@+id/editTextPar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
 
         </TableRow>
 
@@ -173,12 +177,13 @@
                 android:id="@+id/TextView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LLegada:" />
+                android:text="@string/llegada_" />
 
-            <TextView
-                android:id="@+id/textViewLlegad"
+            <EditText
+                android:id="@+id/editTextLleg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:ems="10" />
 
         </TableRow>
 

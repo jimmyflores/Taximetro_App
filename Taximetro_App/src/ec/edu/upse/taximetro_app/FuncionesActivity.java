@@ -9,37 +9,39 @@ import android.widget.Toast;
 
 public class FuncionesActivity extends Activity {
 
-	String id_usuario;
-	
+	Integer id;
+	String nombre_usuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_funciones);
-		Intent intent = getIntent();
-		id_usuario = intent.getStringExtra("id_usuario");
-		Toast.makeText(this, "id_usuario_consultas "+id_usuario, Toast.LENGTH_LONG).show();
+		Intent intentActual = this.getIntent();
+		try {
+		id = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
+		nombre_usuario = intentActual.getStringExtra("usuario");
+		Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id, Toast.LENGTH_LONG).show();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.funciones, menu);
+		//getMenuInflater().inflate(R.menu.funciones, menu);
 		return true;
 	}
 	
 	
 	public void onInicio(View boton){
 		Intent intent =new Intent(this,MapaActivity.class);
+		intent.putExtra("id_usuario", ""+id);
+		intent.putExtra("usuario", nombre_usuario);
 		startActivity(intent);
 	}
 	
 	public void onConsultas(View boton){
 		Intent intent =new Intent(this,Menu_ConsultasActivity.class);
-		intent.putExtra("id_usuario_funciones", id_usuario);
-		Toast.makeText(this, "id_usuario_consultasON "+id_usuario, Toast.LENGTH_LONG).show();
 		startActivity(intent);
 	}
-	
-	
-
 }

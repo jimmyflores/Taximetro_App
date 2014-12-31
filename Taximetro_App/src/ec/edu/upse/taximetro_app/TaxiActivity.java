@@ -1,7 +1,8 @@
 package ec.edu.upse.taximetro_app;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,12 +14,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import ec.edu.upse.taximetro_app.modelo.Carrera;
 import ec.edu.upse.taximetro_app.modelo.DBTaximetro;
 import ec.edu.upse.taximetro_app.modelo.Tarifa;
-
-
-
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -41,13 +38,16 @@ import android.widget.ToggleButton;
 
 public class TaxiActivity extends Activity implements LocationListener{
 	
-	TextView et_Km, et_$,et_Partida, et_Llegada, et_TipoTarifa;
+	TextView et_Km, et_$, et_TipoTarifa;
+	EditText et_Partida, et_Llegada;
 	Button Guardar, Cancelar;
 	ToggleButton button_O_O;
     Chronometer CronometroTiempo;
     
 		// daclarar variable que representa al mapa
-		GoogleMap mapa;
+    	Integer id_usuario;
+    	String nombre_usuario;
+    	GoogleMap mapa;
 		Location locationI, locationF;
 		LocationManager locationManager;
 		String proveedor;
@@ -69,10 +69,19 @@ public class TaxiActivity extends Activity implements LocationListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_taxi);
+		Intent intentActual = this.getIntent();
+				try {
+						id_usuario = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
+						nombre_usuario = intentActual.getStringExtra("usuario");
+						Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id_usuario, Toast.LENGTH_LONG).show();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		Inicializar();
-			DBTaximetro db = new DBTaximetro();
-			Date hora =new Date();
-			Integer v_hora = hora.getHours();
+		DBTaximetro db = new DBTaximetro();
+		Date hora =new Date();
+		Integer v_hora = hora.getHours();
+			
 			tarifa = db.selectAllTarifa(this, v_hora);
 			if(tarifa != null){
 				Tarifa_arranque = tarifa.getArranque_tarifa();
@@ -118,8 +127,8 @@ public class TaxiActivity extends Activity implements LocationListener{
 		CronometroTiempo = (Chronometer) findViewById(R.id.CronometroTiempo);
 		et_Km = (TextView) findViewById(R.id.textViewkilo);
 		et_$ = (TextView) findViewById(R.id.textViewCosto);
-		et_Partida = (TextView) findViewById(R.id.textViewPartid);
-		et_Llegada = (TextView) findViewById(R.id.textViewLlegad);
+		et_Partida = (EditText) findViewById(R.id.editTextPar);
+		et_Llegada = (EditText) findViewById(R.id.editTextLleg);
 		button_O_O = (ToggleButton) findViewById(R.id.toggleButtonSat);
 	 	mapa = ((MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMapas)).getMap();
  	}
@@ -159,13 +168,14 @@ public class TaxiActivity extends Activity implements LocationListener{
 			
 			if(locationI !=null){
 				
+				CronometroTiempo.start();
 				latitud_inicio = locationI.getLatitude();
 				longitud_inicio = locationI.getLongitude();
 				latlng = new LatLng(latitud_inicio, longitud_inicio);
 				agregarMarca(latitud_inicio, longitud_inicio, "PUNTO DE PARTIDA", "Ubicación Inicio");	
 				polilinea_options = new PolylineOptions().add(latlng).color(Color.RED);
 				polilinea = mapa.addPolyline(polilinea_options);
-				et_Partida.setText("LAT "+latitud_inicio+ " LONG "+longitud_inicio);
+				
 				//ACTUALIZACIÓN DE LA LOCALIZACIÓN...PROVEEDOR, MILISEGUNDOS, METROS, ACTIVIDAD
 				locationManager.requestLocationUpdates(proveedor, 250, 0, this);
 			}else{
@@ -180,8 +190,8 @@ public class TaxiActivity extends Activity implements LocationListener{
 			longitud_final = locationF.getLongitude();
 			agregarMarca(latitud_final, longitud_final, "PUNTO DE LLEGADA", "Ubicación Final");
 			//et_tiempo.setText(total_segundos/3600 + "h");
-			et_Llegada.setText("LAT "+latitud_final+ " LONG "+longitud_final);
-			et_Km.setText(distancia_total/1000+" Km");
+			
+			et_Km.setText(distancia_total/1000+"");
 			
 			locationI = null;
 			locationF=null;
@@ -194,7 +204,12 @@ public class TaxiActivity extends Activity implements LocationListener{
 			CronometroTiempo.stop();		
 		}	
 	}
-	
+	public String getFechaActual(){
+				Calendar c1;
+				 	c1 = Calendar.getInstance();	
+			        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			        return sdf.format(c1.getTime());
+		}
 	float total_segundos=0;
 	
 	public void onCancelar(View boton){
@@ -217,13 +232,18 @@ public class TaxiActivity extends Activity implements LocationListener{
 		
 		
 		DBTaximetro dbTaxi = new DBTaximetro();
-    	if (isEmpty()){
+		if (locationI!=null && isEmpty()){
     		Toast.makeText(this,"Algun(os) Campo(s) stán vacios!!", Toast.LENGTH_LONG).show();
     	}else{
-	    		//Carrera cr=new Carrera(0,et_Km.toString(), et_$.getText().toString(), et_Partida.getText().toString(), et_Llegada.getText().toString());
-	    		//dbTaxi.nuevaCarrera(this, cr.getIdCarrera(), cr.getIdPersonas(), cr.getIdTarifa(), cr.getKm(),cr.getValor(),cr.getOrigen(),cr.getCordenada_origen(),cr.getDestino(), cr.getCordenada_destino(),cr.getDia(),cr.getMes(),cr.getAnio());
-	    		//Toast.makeText(this,"Carrera Registrada exitosamente", Toast.LENGTH_SHORT).show();
-	    		//Limpiar();		
+	    
+    		Double kilometrosRecorridos = Double.parseDouble(""+et_Km.getText());	
+    		Double costoCarrera = Double.parseDouble(""+et_$.getText());
+    		dbTaxi.nuevaCarrera(this, id_usuario , tarifa.getId(),
+    		kilometrosRecorridos,costoCarrera,
+    			""+et_Partida.getText(),latitud_inicio,longitud_inicio,
+    			""+et_Llegada.getText(),latitud_final,longitud_final,getFechaActual(),""+CronometroTiempo.getText());
+    			Toast.makeText(this,"Carrera Registrada exitosamente", Toast.LENGTH_SHORT).show();
+	    		Limpiar();		
     	}	
 	}
  // falta de terminar el registrar carrera..

@@ -25,7 +25,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:text="Menú de Consultas" />
-
         </RelativeLayout>
 
         <ImageView
@@ -51,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="onTarifas"
                 android:text="Tabla de tarifas de la ANT" />
-
         </TableRow>
 
         <TableRow
@@ -71,13 +69,26 @@
                 android:layout_height="wrap_content"
                 android:onClick="onFechas"
                 android:text="Por rango de fechas" />
-
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tabla_tarifa" />
+
+            <Button
+                android:id="@+id/buttoncarrera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCarreras"
+                android:text="Carreras Realizadas" />
+
         </TableRow>
 
         <TableRow
@@ -85,7 +96,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
         </TableRow>
-
     </TableLayout>
 
 </LinearLayout>

@@ -2,6 +2,8 @@ package ec.edu.upse.taximetro_app.utiles;
 
 import java.util.List;
 
+import ec.edu.upse.taximetro_app.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import ec.edu.upse.taximetro_app.R;
+
 
 public class CustomListViewAdapter extends ArrayAdapter<ItemTablita> {
 	Context context;

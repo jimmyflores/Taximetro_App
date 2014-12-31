@@ -37,7 +37,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAQ7Iti_bSfCigfzYSPXfoBvS_yFd6ShRY" />
+            android:value="AIzaSyA7n3QQXyNB1UbXUN3S8yuKWQ8J-OLfYZk" />
 
         <activity
             android:name="ec.edu.upse.taximetro_app.MainActivity"
@@ -87,6 +87,14 @@
         <activity
             android:name="ec.edu.upse.taximetro_app.ItemTablitaActivity"
             android:label="@string/title_activity_item_tablita" >
+        </activity>
+        <activity
+            android:name="ec.edu.upse.taximetro_app.Consulta_carrera"
+            android:label="@string/title_activity_consulta_carrera" >
+        </activity>
+        <activity
+            android:name="ec.edu.upse.taximetro_app.Item_detalle"
+            android:label="@string/title_activity_item_detalle" >
         </activity>
     </application>
 
