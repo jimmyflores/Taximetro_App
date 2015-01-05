@@ -32,8 +32,8 @@ public class Menu_ConsultasActivity extends Activity {
 		startActivity(intent);
 	}
 	public void onCarreras(View boton){
-		Intent intent =new Intent(this,Consulta_carrera.class);
-		startActivity(intent);
+		//Intent intent =new Intent(this,Consulta_carrera.class);
+		//startActivity(intent);
 	}
 	
 }

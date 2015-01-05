@@ -52,11 +52,12 @@ public class MapaActivity extends Activity implements LocationListener{
 			//seleccionar un provider
 			if(gpsHabilitado){
 				proveedor = LocationManager.GPS_PROVIDER;
-			}else 
+			}else{ 
 				if(networkHabilitado)
 				  {
 	               proveedor =LocationManager.NETWORK_PROVIDER;   			
 			      }
+			}
 			if(proveedor!=null){
 				//es decir que alguno de los tipos de localzacion estan activados y podremos obtener la localizacion
 				
@@ -71,21 +72,17 @@ public class MapaActivity extends Activity implements LocationListener{
 				double lat = location.getLatitude();
 				double longi = location.getLongitude();
 				agregarMarca(lat, longi, "ubica", "Ubicacion actual");
-				Toast.makeText(this,"lat:" +lat+ " " + "long: " +longi,Toast.LENGTH_LONG).show();
-				
-				
+				Toast.makeText(this,"lat:" +lat+ " " + "long: " +longi,Toast.LENGTH_LONG).show();	
 			}else{
 				Toast.makeText(this,"location es null",Toast.LENGTH_LONG).show();
 				
 			}
 		}
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mapa);
-		
 		mapa = ((MapFragment)getFragmentManager().findFragmentById(R.id.fragmentMapas)).getMap();
 		//comprobacion
 		if(mapa==null){
@@ -144,6 +141,7 @@ public void agregarMarca(double latitud, double longitud, String titulo, String 
 		getMenuInflater().inflate(R.menu.mapa, menu);
 		return true;
 	}
+
 	@Override
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
@@ -167,5 +165,4 @@ public void agregarMarca(double latitud, double longitud, String titulo, String 
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -166,8 +166,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 				Toast.makeText(this, "proveedor es nulo", Toast.LENGTH_SHORT).show();
 			}
 			
-			if(locationI !=null){
-				
+			if(locationI !=null){	
 				CronometroTiempo.start();
 				latitud_inicio = locationI.getLatitude();
 				longitud_inicio = locationI.getLongitude();
@@ -184,7 +183,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 			
 		}else{
 			// APAGADO OFF
-			
+			if(locationI !=null){
 			locationF = locationManager.getLastKnownLocation(proveedor);
 			latitud_final = locationF.getLatitude();
 			longitud_final = locationF.getLongitude();
@@ -201,9 +200,14 @@ public class TaxiActivity extends Activity implements LocationListener{
 				costoTotalCarrera = Tarifa_minima;
 				et_$.setText(""+costoTotalCarrera);
 			}
-			CronometroTiempo.stop();		
+			CronometroTiempo.stop();
+			}
+			else{
+				Toast.makeText(this, "location es null", Toast.LENGTH_SHORT).show();
+			}
 		}	
 	}
+	
 	public String getFechaActual(){
 				Calendar c1;
 				 	c1 = Calendar.getInstance();	
@@ -229,13 +233,10 @@ public class TaxiActivity extends Activity implements LocationListener{
 
  public void onGuardar(View boton){
 		Inicializar();
-		
-		
 		DBTaximetro dbTaxi = new DBTaximetro();
-		if (locationI!=null && isEmpty()){
+		if (locationI == null && isEmpty()){
     		Toast.makeText(this,"Algun(os) Campo(s) stán vacios!!", Toast.LENGTH_LONG).show();
     	}else{
-	    
     		Double kilometrosRecorridos = Double.parseDouble(""+et_Km.getText());	
     		Double costoCarrera = Double.parseDouble(""+et_$.getText());
     		dbTaxi.nuevaCarrera(this, id_usuario , tarifa.getId(),
@@ -243,7 +244,7 @@ public class TaxiActivity extends Activity implements LocationListener{
     			""+et_Partida.getText(),latitud_inicio,longitud_inicio,
     			""+et_Llegada.getText(),latitud_final,longitud_final,getFechaActual(),""+CronometroTiempo.getText());
     			Toast.makeText(this,"Carrera Registrada exitosamente", Toast.LENGTH_SHORT).show();
-	    		Limpiar();		
+	    		Limpiar();
     	}	
 	}
  // falta de terminar el registrar carrera..

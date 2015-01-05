@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ec.edu.upse.taximetro_app.R;
 import ec.edu.upse.taximetro_app.utiles.ItemConsulta;
 import ec.edu.upse.taximetro_app.utiles.ItemDeUsuario;
-import ec.edu.upse.taximetro_app.utiles.ItemDetalle;
+//import ec.edu.upse.taximetro_app.utiles.ItemDetalle;
 import ec.edu.upse.taximetro_app.utiles.ItemTablita;
 import android.content.Context;
 import android.database.Cursor;
@@ -110,11 +110,11 @@ public class DBTaximetro {
 			// Recorrer los resultados
 			do{
 				listaUsuario = new Usuario();
-								listaUsuario.setId_u(cursor.getInt(0));
-								listaUsuario.setUsuario(cursor.getString(1));
+								listaUsuario.setId(cursor.getInt(0));
+								listaUsuario.setNombre_usuario(cursor.getString(1));
 								
 								Persona per = new Persona();
-								per.setId_p(cursor.getInt(2));
+								per.setId(cursor.getInt(2));
 								per.setNombres(cursor.getString(3));
 								per.setApellidos(cursor.getString(4));
 								per.setEmail(cursor.getString(5));
@@ -183,7 +183,7 @@ public ArrayList<ItemTablita> BuscarTabla(Context contexto){
 	return listaTabla;
 }
 
-public ArrayList<ItemDetalle> BuscarCarrera(Context contexto){
+/*public ArrayList<ItemDetalle> BuscarCarrera(Context contexto){
 	
 	ArrayList<ItemDetalle> listaTabla=null;
 	
@@ -206,7 +206,7 @@ public ArrayList<ItemDetalle> BuscarCarrera(Context contexto){
 	}
 	
 	return listaTabla;
-}
+}*/
 
 public ArrayList<ItemTablita> BuscarPorDestino(Context contexto,String Parametro){
 	
