@@ -9,10 +9,14 @@ import android.widget.Toast;
 
 public class Menu_ConsultasActivity extends Activity {
 
+	Integer id_usuario;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu__consultas);
+		Intent intent = getIntent();
+		id_usuario = Integer.parseInt(intent.getStringExtra("id_usuario"));
 	}
 
 	@Override
@@ -29,6 +33,7 @@ public class Menu_ConsultasActivity extends Activity {
 	
 	public void onFechas(View boton){
 		Intent intent =new Intent(this,ConsultasActivity.class);
+		intent.putExtra("id_usuario", id_usuario);
 		startActivity(intent);
 	}
 	public void onCarreras(View boton){

@@ -42,6 +42,7 @@ public class FuncionesActivity extends Activity {
 	
 	public void onConsultas(View boton){
 		Intent intent =new Intent(this,Menu_ConsultasActivity.class);
+		intent.putExtra("id_usuario", ""+id);
 		startActivity(intent);
 	}
 }

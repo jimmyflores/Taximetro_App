@@ -265,4 +265,60 @@ public ArrayList<ItemConsulta> listarConsulta(Context contexto){
 	
 	return listaConsultas;
  }
+
+
+public ArrayList<ItemConsulta> BuscarPorFecha(Context contexto, Integer id_u, String fecha_desde, String fecha_hasta){
+	ArrayList<ItemConsulta> listarcarreras = null;
+	SqlTaximetro carrerasDB = new SqlTaximetro(contexto, DB_NAME, null, 1);
+	SQLiteDatabase db = carrerasDB.getReadableDatabase();
+	listarcarreras = new ArrayList<ItemConsulta>();
+	String[] parametrosBusqueda = new String[]{id_u.toString(), fecha_desde.toString(), fecha_hasta.toString()};
+	String sql = "Select origen, destino, km, valor From " +TABLA_NAME2+
+							" WHERE id_usuario=? and fecha>=? and fecha<=?";
+	Cursor cursor = db.rawQuery(sql, parametrosBusqueda);
+		if(cursor.moveToFirst()){
+				do{
+					ItemConsulta item = new ItemConsulta(cursor.getString(0), cursor.getString(1), 
+															cursor.getDouble(2), cursor.getDouble(3));
+					listarcarreras.add(item);
+				}while(cursor.moveToNext());
+		}
+	db.close();
+	return listarcarreras;
+	}
+
+
+
+public Integer numero_de_carreras(Context contexto, Integer id_u, String fecha_desde, String fecha_hasta){
+	SqlTaximetro carrerasDB = new SqlTaximetro(contexto, DB_NAME, null, 1);
+	Integer numerodecarreras=0;
+	SQLiteDatabase db = carrerasDB.getReadableDatabase();
+	String[] parametrosBusqueda = new String[]{id_u.toString(), fecha_desde.toString(), fecha_hasta.toString()};
+	String sql = "Select COUNT(id_c) From " +TABLA_NAME2+ " WHERE id_usuario=? and fecha>=? and fecha<=?";
+	Cursor cursor = db.rawQuery(sql, parametrosBusqueda);
+		if(cursor.moveToFirst()){
+			do{
+				numerodecarreras = cursor.getInt(0);
+			}while(cursor.moveToNext());
+		}
+	db.close();
+	return numerodecarreras;
+}
+
+public Double valor_total(Context contexto, Integer id_u, String fecha_desde, String fecha_hasta){
+	SqlTaximetro carrerasDB = new SqlTaximetro(contexto, DB_NAME, null, 1);
+	Double total=0.0;
+	SQLiteDatabase db = carrerasDB.getReadableDatabase();
+	String[] parametrosBusqueda = new String[]{id_u.toString(), fecha_desde.toString(), fecha_hasta.toString()};
+	String sql = "Select SUM(valor) From " +TABLA_NAME2+ " WHERE id_usuario=? and fecha>=? and fecha<=?";
+	Cursor cursor = db.rawQuery(sql, parametrosBusqueda);
+		if(cursor.moveToFirst()){
+			do{
+				total = cursor.getDouble(0);
+			}while(cursor.moveToNext());
+		}
+	db.close();
+	return total;
+}
+
 }
