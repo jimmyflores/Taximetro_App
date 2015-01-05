@@ -24,16 +24,19 @@ public class ConsultasActivity extends Activity {
     DatePicker desde, hasta;
     String accion;
     Integer id_usuario;
+    String nombre_usuario;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_consultas);
+		Intent intentActual = this.getIntent();
 		try {
-			Intent intent = this.getIntent();
-			id_usuario = Integer.parseInt(intent.getStringExtra("id_usuario"));	
+		id_usuario = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
+		nombre_usuario = intentActual.getStringExtra("usuario");
+		//Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id, Toast.LENGTH_LONG).show();
 		} catch (Exception e) {
-			// TODO: handle exception
+		e.printStackTrace();
 		}
 		
 		Inicializar();

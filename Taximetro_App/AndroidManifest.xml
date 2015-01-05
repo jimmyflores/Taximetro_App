@@ -96,6 +96,14 @@
             android:name="ec.edu.upse.taximetro_app.Item_detalle"
             android:label="@string/title_activity_item_detalle" >
         </activity>
+        <activity
+            android:name="ec.edu.upse.taximetro_app.TablaCarrerasActivity"
+            android:label="@string/title_activity_tabla_carreras" >
+        </activity>
+        <activity
+            android:name="ec.edu.upse.taximetro_app.ItemCarreraActivity"
+            android:label="@string/title_activity_item_carrera" >
+        </activity>
     </application>
 
 </manifest>

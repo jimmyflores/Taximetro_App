@@ -15,6 +15,7 @@ public class FuncionesActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_funciones);
+		
 		Intent intentActual = this.getIntent();
 		try {
 		id = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
@@ -28,7 +29,7 @@ public class FuncionesActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.funciones, menu);
+		getMenuInflater().inflate(R.menu.funciones, menu);
 		return true;
 	}
 	
@@ -43,6 +44,7 @@ public class FuncionesActivity extends Activity {
 	public void onConsultas(View boton){
 		Intent intent =new Intent(this,Menu_ConsultasActivity.class);
 		intent.putExtra("id_usuario", ""+id);
+		intent.putExtra("usuario", nombre_usuario);
 		startActivity(intent);
 	}
 }

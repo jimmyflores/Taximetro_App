@@ -6,54 +6,58 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Item_tablaActivity" >
+    tools:context=".ItemCarreraActivity" >
 
     <TextView
-        android:id="@+id/textViewNumCarreras"
+        android:id="@+id/textViewOri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:text="Origen:" />
 
     <TextView
-        android:id="@+id/textViewOrig"
+        android:id="@+id/textViewOri2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewNumCarreras"
-        android:layout_alignBottom="@+id/textViewNumCarreras"
-        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/textViewOri"
+        android:layout_alignBottom="@+id/textViewOri"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/textViewOri"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textViewVTCarreras"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewNumCarreras"
-        android:layout_below="@+id/textViewNumCarreras"
+        android:layout_alignLeft="@+id/textViewOri"
+        android:layout_below="@+id/textViewOri"
         android:text="Destino:" />
 
     <TextView
-        android:id="@+id/textViewDest"
+        android:id="@+id/textViewDes2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewVTCarreras"
-        android:layout_alignBottom="@+id/textViewVTCarreras"
-        android:layout_alignLeft="@+id/textViewOrig"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/textViewOri2"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:text="Fecha:" />
 
     <TextView
         android:id="@+id/textViewFe2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewVTCarreras"
-        android:layout_below="@+id/textViewVTCarreras"
-        android:text="Costo:" />
-
-    <TextView
-        android:id="@+id/textViewCost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewDest"
-        android:layout_below="@+id/textViewDest"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/textViewDes2"
         android:text="TextView" />
 
 </RelativeLayout>
