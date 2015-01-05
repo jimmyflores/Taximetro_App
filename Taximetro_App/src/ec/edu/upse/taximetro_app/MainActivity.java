@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
     		Intent intent =new Intent(this,FuncionesActivity.class);
     		intent.putExtra("id_usuario", ""+user.getId());
     		intent.putExtra("usuario", user.getNombre_usuario());
-    		Toast.makeText(this, "usuario: "+user.getId(), Toast.LENGTH_LONG).show();
+    		//Toast.makeText(this, "usuario: "+user.getId(), Toast.LENGTH_LONG).show();
     		startActivity(intent);
     		Limpiar();   	
 	}	

@@ -19,7 +19,7 @@ public class FuncionesActivity extends Activity {
 		try {
 		id = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
 		nombre_usuario = intentActual.getStringExtra("usuario");
-		Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id, Toast.LENGTH_LONG).show();
 		} catch (Exception e) {
 		e.printStackTrace();
 		}

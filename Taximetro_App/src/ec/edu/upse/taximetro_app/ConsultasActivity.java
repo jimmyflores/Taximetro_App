@@ -29,8 +29,13 @@ public class ConsultasActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_consultas);
-		Intent intent = getIntent();
-		id_usuario = Integer.parseInt(intent.getStringExtra("id_usuario"));
+		try {
+			Intent intent = this.getIntent();
+			id_usuario = Integer.parseInt(intent.getStringExtra("id_usuario"));	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		Inicializar();
 	}
      

@@ -1,5 +1,6 @@
 package ec.edu.upse.taximetro_app;
 
+import com.google.android.gms.internal.bt;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -12,7 +13,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +24,9 @@ import android.widget.ToggleButton;
 
 public class MapaActivity extends Activity implements LocationListener{
 	
+	Integer id;
+	String nombre_usuario;
+	Double latitud = 0.0, longitud = 0.0;
 	//declarar variable que represente al mapa
 		
 		GoogleMap mapa;
@@ -40,7 +46,7 @@ public class MapaActivity extends Activity implements LocationListener{
 			
 			// ningun provide de localizacion esta habilitado 
 			
-			if(!gpsHabilitado&&!networkHabilitado)
+			if(!gpsHabilitado && !networkHabilitado)
 			{
 				Toast.makeText(this,"no provider habilitado",Toast.LENGTH_LONG).show();
 				//LANZAR LA ACTIVIDAD DE CONFIGURACION DE FUENTES DE LOCALIZACION
@@ -71,7 +77,7 @@ public class MapaActivity extends Activity implements LocationListener{
 			if(location!=null){
 				double lat = location.getLatitude();
 				double longi = location.getLongitude();
-				agregarMarca(lat, longi, "ubica", "Ubicacion actual");
+				agregarMarca(lat, longi, "Inicio de Carrera", "Ubicacion actual");
 				Toast.makeText(this,"lat:" +lat+ " " + "long: " +longi,Toast.LENGTH_LONG).show();	
 			}else{
 				Toast.makeText(this,"location es null",Toast.LENGTH_LONG).show();
@@ -83,6 +89,14 @@ public class MapaActivity extends Activity implements LocationListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mapa);
+		Intent intentActual = this.getIntent();
+		try {
+			id = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
+			nombre_usuario = intentActual.getStringExtra("usuario");
+			//Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id, Toast.LENGTH_LONG).show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		mapa = ((MapFragment)getFragmentManager().findFragmentById(R.id.fragmentMapas)).getMap();
 		//comprobacion
 		if(mapa==null){
@@ -93,8 +107,6 @@ public class MapaActivity extends Activity implements LocationListener{
 			mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			mapa.getUiSettings().setZoomControlsEnabled(true);
 			mapa.getUiSettings().setCompassEnabled(true);
-			
-			agregarMarca(-33.796923, 150.922433, "Mi marca", "Esta es mi direccion");
 		}
 	}
 
@@ -113,8 +125,29 @@ public class MapaActivity extends Activity implements LocationListener{
 	}
 
 public void irTaximetro(View boton){
-	Intent intent =new Intent(this,TaxiActivity.class);
-	startActivity(intent);
+	if (location!=null && latitud == 0.0 && longitud == 0.0){
+		Intent intent =new Intent(this,TaxiActivity.class);
+		intent.putExtra("id_usuario", ""+id);
+		intent.putExtra("usuario", nombre_usuario);
+		intent.putExtra("latitud_inicio", ""+latitud);
+		intent.putExtra("longitud_inicio", ""+longitud);
+		startActivity(intent);
+	}else{
+		crearMensaje("No puede iniciar el Taximetro sin tener su Ubicación Actual");
+	}
+}
+
+public void crearMensaje(String Mensaje){
+	AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+	dialog.setMessage(Mensaje);
+	dialog.setCancelable(false);
+		dialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+			  @Override
+			  public void onClick(DialogInterface dialog, int which) {
+			    
+			  }
+			});	
+	dialog.show();
 }
 
 public void agregarMarca(double latitud, double longitud, String titulo, String mensaje){

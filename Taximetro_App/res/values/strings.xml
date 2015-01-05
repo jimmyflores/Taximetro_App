@@ -34,5 +34,12 @@
     <string name="title_activity_item_detalle">Item_detalle</string>
     <string name="partida_">Partida:</string>
     <string name="llegada_">LLegada:</string>
+    <string name="text_costo_carrera">"Costo de la Carrera: "</string>
+    <string name="kilometros_recorridos">"Kilometros Recorridos: "</string>
+    <string name="text_tiempo_transcurrido">"Tiempo Transcurrido: "</string>
+    <string name="text_sitio_partida">Sitio de Partida:</string>
+    <string name="text_sitio_llegada">Sitio de LLegada:</string>
+    <string name="text_iniciar_carrera">Iniciar Carrera</string>
+    <string name="text_cancelar">Cancelar</string>
 
 </resources>

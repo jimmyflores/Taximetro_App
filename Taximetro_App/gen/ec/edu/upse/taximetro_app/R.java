@@ -231,15 +231,15 @@ containing a value of this type.
         public static final int tabla_tarifa=0x7f020026;
     }
     public static final class id {
-        public static final int CronometroTiempo=0x7f05004b;
+        public static final int CronometroTiempo=0x7f05004a;
         public static final int ImageView01=0x7f05003a;
         public static final int LinearLayout1=0x7f05002d;
         public static final int LinearLayout2=0x7f050021;
         public static final int ScrollView1=0x7f050005;
-        public static final int TextView01=0x7f05004e;
-        public static final int TextView02=0x7f050050;
-        public static final int TextView03=0x7f050052;
-        public static final int action_settings=0x7f050056;
+        public static final int TextView01=0x7f05004d;
+        public static final int TextView02=0x7f05004f;
+        public static final int TextView03=0x7f050051;
+        public static final int action_settings=0x7f050055;
         public static final int btn_Acceder=0x7f050031;
         public static final int btn_Cancelar=0x7f050043;
         public static final int btn_Consulta=0x7f050027;
@@ -247,8 +247,8 @@ containing a value of this type.
         public static final int btn_Registro=0x7f050033;
         public static final int buttonBusca=0x7f050010;
         public static final int buttonBuscarP=0x7f050045;
-        public static final int buttonCancelar=0x7f050055;
-        public static final int buttonGuardar=0x7f050054;
+        public static final int buttonCancelar=0x7f050054;
+        public static final int buttonGuardar=0x7f050053;
         public static final int buttonIr=0x7f050037;
         public static final int buttonRegresar=0x7f050020;
         public static final int buttonUbicar=0x7f050034;
@@ -260,9 +260,9 @@ containing a value of this type.
         public static final int editTeextBuscarP=0x7f050044;
         public static final int editTextApellidos=0x7f05003d;
         public static final int editTextE_mail=0x7f05003e;
-        public static final int editTextLleg=0x7f050053;
+        public static final int editTextLleg=0x7f050052;
         public static final int editTextNombres=0x7f05003c;
-        public static final int editTextPar=0x7f050051;
+        public static final int editTextPar=0x7f050050;
         public static final int editTextPassRegistro=0x7f050042;
         public static final int editTextPassword=0x7f050030;
         public static final int editTextUserRegistro=0x7f050040;
@@ -278,7 +278,7 @@ containing a value of this type.
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
         public static final int tableRow1=0x7f050006;
-        public static final int tableRow10=0x7f050048;
+        public static final int tableRow10=0x7f050047;
         public static final int tableRow2=0x7f050008;
         public static final int tableRow3=0x7f05000b;
         public static final int tableRow4=0x7f05000e;
@@ -293,30 +293,29 @@ containing a value of this type.
         public static final int textView3=0x7f05001f;
         public static final int textView6=0x7f050041;
         public static final int textViewCost=0x7f05002c;
-        public static final int textViewCosto=0x7f05004f;
+        public static final int textViewCosto=0x7f05004e;
         public static final int textViewDesd=0x7f050009;
         public static final int textViewDest=0x7f05002b;
         public static final int textViewDistanciaVista=0x7f050029;
         public static final int textViewHast=0x7f05000c;
         public static final int textViewKMV=0x7f050015;
-        public static final int textViewKm =0x7f05004c;
+        public static final int textViewKm =0x7f05004b;
         public static final int textViewLlegad=0x7f05003f;
-        public static final int textViewMap=0x7f050047;
         public static final int textViewNombre=0x7f05002f;
         public static final int textViewNumCarreras=0x7f05001a;
         public static final int textViewOrig=0x7f05002a;
         public static final int textViewPartid=0x7f050022;
-        public static final int textViewRecorrido=0x7f05004a;
+        public static final int textViewRecorrido=0x7f050049;
         public static final int textViewResultados=0x7f050012;
         public static final int textViewRuta=0x7f050019;
         public static final int textViewRutaVista=0x7f050028;
         public static final int textViewTiemp=0x7f050014;
-        public static final int textViewTipoTarifa=0x7f050049;
+        public static final int textViewTipoTarifa=0x7f050048;
         public static final int textViewUsuario=0x7f050032;
         public static final int textViewVTCarreras=0x7f05001d;
         public static final int textViewValorCCVista=0x7f050025;
         public static final int textViewVtotal=0x7f05001c;
-        public static final int textViewkilo=0x7f05004d;
+        public static final int textViewkilo=0x7f05004c;
         public static final int toggleButtonSat=0x7f050035;
     }
     public static final class integer {
@@ -457,11 +456,18 @@ containing a value of this type.
         public static final int contrasenia=0x7f060022;
         public static final int email=0x7f060020;
         public static final int hello_world=0x7f06001c;
+        public static final int kilometros_recorridos=0x7f06003c;
         public static final int llegada_=0x7f06003a;
         public static final int nombres=0x7f06001e;
         public static final int partida_=0x7f060039;
         public static final int registrarse=0x7f060023;
         public static final int registro=0x7f06001d;
+        public static final int text_cancelar=0x7f060041;
+        public static final int text_costo_carrera=0x7f06003b;
+        public static final int text_iniciar_carrera=0x7f060040;
+        public static final int text_sitio_llegada=0x7f06003f;
+        public static final int text_sitio_partida=0x7f06003e;
+        public static final int text_tiempo_transcurrido=0x7f06003d;
         public static final int title_activity_consulta_=0x7f060027;
         public static final int title_activity_consulta_carrera=0x7f060037;
         public static final int title_activity_consultas=0x7f060028;

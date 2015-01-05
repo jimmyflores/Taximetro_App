@@ -24,7 +24,9 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
@@ -38,6 +40,7 @@ import android.widget.ToggleButton;
 
 public class TaxiActivity extends Activity implements LocationListener{
 	
+	
 	TextView et_Km, et_$, et_TipoTarifa;
 	EditText et_Partida, et_Llegada;
 	Button Guardar, Cancelar;
@@ -47,7 +50,6 @@ public class TaxiActivity extends Activity implements LocationListener{
 		// daclarar variable que representa al mapa
     	Integer id_usuario;
     	String nombre_usuario;
-    	GoogleMap mapa;
 		Location locationI, locationF;
 		LocationManager locationManager;
 		String proveedor;
@@ -71,9 +73,10 @@ public class TaxiActivity extends Activity implements LocationListener{
 		setContentView(R.layout.activity_taxi);
 		Intent intentActual = this.getIntent();
 				try {
-						id_usuario = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
-						nombre_usuario = intentActual.getStringExtra("usuario");
-						Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id_usuario, Toast.LENGTH_LONG).show();
+					id_usuario = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
+					nombre_usuario = intentActual.getStringExtra("usuario");
+					latitud_inicio = Double.parseDouble(intentActual.getStringExtra("latitud_inicio"));
+					longitud_inicio = Double.parseDouble(intentActual.getStringExtra("longitud_inicio"));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -92,27 +95,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 				//Toast.makeText(this,""+v_hora, Toast.LENGTH_LONG).show();
 				costoTotalCarrera = 0.0;
 				costoTotalCarrera = costoTotalCarrera + Tarifa_arranque;
-			}
-		if(mapa==null){
-			Toast.makeText(this, "no se pudo crear mapa", Toast.LENGTH_LONG).show();
-		}else{
-			mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-			mapa.getUiSettings().setZoomControlsEnabled(true);
-			mapa.getUiSettings().setCompassEnabled(true);
-		}
-		
-	}
-	
-	
-	public void agregarMarca(double latitud, double longitud, String titulo, String mensaje){
-		MarkerOptions marca = new MarkerOptions();
-		LatLng ubicacion = new LatLng(latitud, longitud);
-		marca.position(ubicacion);
-		marca.title(titulo);
-		marca.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
-		marca.snippet(mensaje);
-		mapa.addMarker(marca);
-		mapa.animateCamera(CameraUpdateFactory.newLatLng(ubicacion));
+			}	
 	}
 	
 	@Override
@@ -130,7 +113,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 		et_Partida = (EditText) findViewById(R.id.editTextPar);
 		et_Llegada = (EditText) findViewById(R.id.editTextLleg);
 		button_O_O = (ToggleButton) findViewById(R.id.toggleButtonSat);
-	 	mapa = ((MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMapas)).getMap();
+//	 	mapa = ((MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMapas)).getMap();
  	}
 	
 	
@@ -150,61 +133,64 @@ public class TaxiActivity extends Activity implements LocationListener{
 			et_$.setText(""+costoTotalCarrera);
 			locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 			boolean gpsHabilitado = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+			boolean networkHabilitado = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 			
-			if(!gpsHabilitado){
-				Toast.makeText(this, "no provider habilitado, por favor habilite", Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-				startActivity(intent);			
+			if(!gpsHabilitado && !networkHabilitado)
+			{
+				Toast.makeText(this,"no provider habilitado",Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				startActivity(intent);	
 			}
-			
-			// SELECCIONAR UN PROVIDER
-			if(gpsHabilitado){ proveedor = LocationManager.GPS_PROVIDER;}
+		
+
+		// SELECCIONAR UN PROVIDER
+			if(gpsHabilitado){
+				proveedor = LocationManager.GPS_PROVIDER;
+			}else{
+				if(networkHabilitado)
+				  {
+	               proveedor =LocationManager.NETWORK_PROVIDER;   			
+			      }
+			}
 			
 			if(proveedor !=null){ //SI ESTÁ ACTIVO EL GPS, SE PODRÁ OBTENER LA LOCACLIZACIÓN
 				locationI = locationManager.getLastKnownLocation(proveedor); 
 			}else{
-				Toast.makeText(this, "proveedor es nulo", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "proveedor es nulo _LocatonI", Toast.LENGTH_SHORT).show();
 			}
-			
+		
 			if(locationI !=null){	
 				CronometroTiempo.start();
-				latitud_inicio = locationI.getLatitude();
-				longitud_inicio = locationI.getLongitude();
 				latlng = new LatLng(latitud_inicio, longitud_inicio);
-				agregarMarca(latitud_inicio, longitud_inicio, "PUNTO DE PARTIDA", "Ubicación Inicio");	
-				polilinea_options = new PolylineOptions().add(latlng).color(Color.RED);
-				polilinea = mapa.addPolyline(polilinea_options);
-				
+			
 				//ACTUALIZACIÓN DE LA LOCALIZACIÓN...PROVEEDOR, MILISEGUNDOS, METROS, ACTIVIDAD
 				locationManager.requestLocationUpdates(proveedor, 250, 0, this);
-			}else{
-				Toast.makeText(this, "location es null", Toast.LENGTH_SHORT).show();
-			}
-			
 		}else{
-			// APAGADO OFF
-			if(locationI !=null){
-			locationF = locationManager.getLastKnownLocation(proveedor);
-			latitud_final = locationF.getLatitude();
-			longitud_final = locationF.getLongitude();
-			agregarMarca(latitud_final, longitud_final, "PUNTO DE LLEGADA", "Ubicación Final");
-			//et_tiempo.setText(total_segundos/3600 + "h");
-			
-			et_Km.setText(distancia_total/1000+"");
-			
-			locationI = null;
-			locationF=null;
-			//removeUpdates -> detener nuevas actualizaciones
-			locationManager.removeUpdates(this);
-			if(costoTotalCarrera < Tarifa_minima ){
-				costoTotalCarrera = Tarifa_minima;
-				et_$.setText(""+costoTotalCarrera);
-			}
-			CronometroTiempo.stop();
-			}
-			else{
-				Toast.makeText(this, "location es null", Toast.LENGTH_SHORT).show();
-			}
+			Toast.makeText(this, "location es nula _btnON", Toast.LENGTH_SHORT).show();
+		}
+		
+	}else{
+		// APAGADO OFF
+		if(locationI !=null){
+		locationF = locationManager.getLastKnownLocation(proveedor);
+		latitud_final = locationF.getLatitude();
+		longitud_final = locationF.getLongitude();
+		
+		et_Km.setText(df.format(distancia_total/1000)+"");
+		
+		locationI = null;
+		locationF=null;
+		//removeUpdates -> detener nuevas actualizaciones
+		locationManager.removeUpdates(this);
+		if(costoTotalCarrera < Tarifa_minima ){
+			costoTotalCarrera = Tarifa_minima;
+			et_$.setText(""+costoTotalCarrera);
+		}
+		CronometroTiempo.stop();
+		}
+		else{
+			Toast.makeText(this, "location es nula _btnOFF", Toast.LENGTH_SHORT).show();
+		}
 		}	
 	}
 	
@@ -217,8 +203,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 	float total_segundos=0;
 	
 	public void onCancelar(View boton){
-		Intent intent =new Intent(this,MainActivity.class);
-		startActivity(intent);
+		crearMensaje(2, "¿Seguro que desea Cancelar la operación y salir?");
 	}
 	
 	public boolean isEmpty(){
@@ -235,7 +220,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 		Inicializar();
 		DBTaximetro dbTaxi = new DBTaximetro();
 		if (locationI == null && isEmpty()){
-    		Toast.makeText(this,"Algun(os) Campo(s) stán vacios!!", Toast.LENGTH_LONG).show();
+    		crearMensaje(1, "Algun(os) Campo(s) stán vacios!!");
     	}else{
     		Double kilometrosRecorridos = Double.parseDouble(""+et_Km.getText());	
     		Double costoCarrera = Double.parseDouble(""+et_$.getText());
@@ -243,10 +228,43 @@ public class TaxiActivity extends Activity implements LocationListener{
     		kilometrosRecorridos,costoCarrera,
     			""+et_Partida.getText(),latitud_inicio,longitud_inicio,
     			""+et_Llegada.getText(),latitud_final,longitud_final,getFechaActual(),""+CronometroTiempo.getText());
-    			Toast.makeText(this,"Carrera Registrada exitosamente", Toast.LENGTH_SHORT).show();
+    			crearMensaje(1,"Carrera Guardada Exitosamente");
 	    		Limpiar();
     	}	
 	}
+ 
+
+public void crearMensaje(int numBotones, String Mensaje){
+	AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+	dialog.setMessage(Mensaje);
+	dialog.setCancelable(false);
+	if(numBotones == 1){
+		dialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+			  @Override
+			  public void onClick(DialogInterface dialog, int which) {
+			    
+			  }
+			});	
+		
+	}
+	if(numBotones == 2){
+		dialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+			  @Override
+			  public void onClick(DialogInterface dialog, int which) {
+			    Intent intent = new Intent(TaxiActivity.this,FuncionesActivity.class);
+			    startActivity(intent);
+			  }
+			});	
+		dialog.setNegativeButton("No",new DialogInterface.OnClickListener() {
+			  @Override
+			  public void onClick(DialogInterface dialog, int which) {
+			    
+			  }
+			});	
+	}
+	dialog.show();
+}
+
  // falta de terminar el registrar carrera..
  
  DecimalFormat df = new DecimalFormat("#.##");
