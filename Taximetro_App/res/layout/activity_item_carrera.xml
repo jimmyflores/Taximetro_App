@@ -27,7 +27,7 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewO1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewOri"
@@ -38,25 +38,25 @@
         android:id="@+id/textViewDes2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignBaseline="@+id/textViewO1"
+        android:layout_alignBottom="@+id/textViewO1"
         android:layout_alignLeft="@+id/textViewOri2"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewO2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/textViewO1"
+        android:layout_below="@+id/textViewO1"
         android:text="Fecha:" />
 
     <TextView
         android:id="@+id/textViewFe2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBaseline="@+id/textViewO2"
+        android:layout_alignBottom="@+id/textViewO2"
         android:layout_alignLeft="@+id/textViewDes2"
         android:text="TextView" />
 

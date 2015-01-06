@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class TablaCarrerasActivity extends Activity {
@@ -48,25 +49,23 @@ public class TablaCarrerasActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View item, int position, long id) {
 			// TODO Auto-generated method stub
 			ItemCarrera itemDeLista = (ItemCarrera)listViewCarrera.getItemAtPosition(position);
-	//		Toast.makeText(parent.getContext(), itemDeLista.getTitle(), Toast.LENGTH_LONG).show(); 
-					
+	//		Toast.makeText(parent.getContext(), itemDeLista.getTitle(), Toast.LENGTH_LONG).show();
 							Intent intent;
-							//intent = new Intent(parent.getContext(), DetalleClienteActivity.class);
-							//startActivity(intent);
-						
-						
-				//intent = new Intent(parent.getContext(), DetalleTarjetaActivity.class);
-			//COLOCAR DATOS EN EL INTENT PARA QUE LLEGUEN A LA SIGUIENTE ACTIVIDAD
+							intent = new Intent(parent.getContext(), DetalleCarreraActivity.class);
+							intent.putExtra("carrera", ""+itemDeLista.getIdCarrera());
+							startActivity(intent);
 			}
 			
 		}
 	
+	
+
 	public void onBusqueda(View Button){
 		txt_buscar=(EditText)findViewById(R.id.editTextBusca);
 		listViewCarrera = (ListView)findViewById(R.id.listView1);
 		//SE TRABAJA CON EL MODELO
 		DBTaximetro dbTaximetro = new DBTaximetro();
-		ArrayList<ItemCarrera> listarTabla = dbTaximetro.BuscarDestino(this, txt_buscar.getText().toString());
+		ArrayList<ItemCarrera> listarTabla = dbTaximetro.BuscarDestino(this, txt_buscar.getText().toString(), id_usuario);
 		//TRABAJAR CON LA INTERFAZ
 		//SE CREA UN CustomListViewAdapter PARA DIBUJAR CADA ELEMENTO DEL listview
 		CustomListCarrera customAdapter = new CustomListCarrera(this, R.layout.activity_item_carrera, listarTabla);

@@ -44,7 +44,6 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -104,6 +103,8 @@
             android:name="ec.edu.upse.taximetro_app.ItemCarreraActivity"
             android:label="@string/title_activity_item_carrera" >
         </activity>
+        <activity android:name="ec.edu.upse.taximetro_app.DetalleCarreraActivity"
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

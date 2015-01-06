@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ConsultasActivity" >
+    tools:context=".DetalleCarreraActivity" >
 
     <TableLayout
         android:layout_width="match_parent"
@@ -22,7 +22,99 @@
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/consulta" />
+                android:src="@drawable/ic_image" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nombres" />
+
+            <TextView
+                android:id="@+id/textViewNombresD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apellidos" />
+
+            <TextView
+                android:id="@+id/textViewApellidosD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textViewO1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Origen:" />
+
+            <TextView
+                android:id="@+id/textViewO2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Destino:" />
+
+            <TextView
+                android:id="@+id/textViewD2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textViewClientePD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Km:" />
+
+            <TextView
+                android:id="@+id/textViewKm2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
         </TableRow>
 
@@ -32,121 +124,16 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textViewDesd"
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Desde" />
-
-        </TableRow>
-
-        <DatePicker
-            android:id="@+id/datePickerDesde"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                android:text="Costo:" />
 
             <TextView
-                android:id="@+id/textViewHast"
+                android:id="@+id/textViewCosto2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hasta:" />
-
-        </TableRow>
-
-        <DatePicker
-            android:id="@+id/datePickerHast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textViewDes2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/buttonBusca"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onBuscar"
-                android:text="Buscar" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textViewResultados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Resultados:" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textViewTiemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ruta" />
-
-            <TextView
-                android:id="@+id/textViewKMV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Distancia" />
-
-            <TextView
-                android:id="@+id/textViewO1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valor" />
-
-        </TableRow>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <ListView
-                android:id="@+id/listViewConsulta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
-            </ListView>
-        </LinearLayout>
-
-        <TableRow
-            android:id="@+id/tableRow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textViewRuta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cantidad de carreras:" />
-
-            <TextView
-                android:id="@+id/textViewNumCarreras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="TextView" />
         </TableRow>
 
         <TableRow
@@ -155,37 +142,23 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textViewVtotal"
+                android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Valor total:" />
-
-            <TextView
-                android:id="@+id/textViewVTCarreras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$ 0.00" />
+                android:text="Ubicación:" />
         </TableRow>
 
-        <TableRow
-            android:id="@+id/tableRow8"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/textViewFe2"
+            <fragment
+                android:id="@+id/fragmentMapaD"
+                android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="197dp" />
 
-            <Button
-                android:id="@+id/buttonRegresar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onRegresar"
-                android:text="Regresar" />
-
-        </TableRow>
-
+        </LinearLayout>
     </TableLayout>
 
 </ScrollView>

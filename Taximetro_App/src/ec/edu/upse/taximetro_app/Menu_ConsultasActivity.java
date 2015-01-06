@@ -40,13 +40,14 @@ public class Menu_ConsultasActivity extends Activity {
 	public void onFechas(View boton){
 		Intent intent =new Intent(this,ConsultasActivity.class);
 		intent.putExtra("id_usuario", ""+id_usuario);
-		intent.putExtra("usuario", nombre_usuario);
+		intent.putExtra("nombre_usuario", nombre_usuario);
 		startActivity(intent);
 	}
+	
 	public void onCarreras(View boton){
 		Intent intent =new Intent(this,TablaCarrerasActivity.class);
 		intent.putExtra("id_usuario", ""+id_usuario);
-		intent.putExtra("usuario", nombre_usuario);
+		intent.putExtra("nombre_usuario", nombre_usuario);
 		startActivity(intent);
 	}
 	

@@ -8,6 +8,7 @@ import ec.edu.upse.taximetro_app.utiles.ItemConsulta;
 import ec.edu.upse.taximetro_app.utiles.ItemDeUsuario;
 //import ec.edu.upse.taximetro_app.utiles.ItemDetalle;
 import ec.edu.upse.taximetro_app.utiles.ItemTablita;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -123,7 +124,7 @@ public class DBTaximetro {
 								listaUsuario.setPersona(per);
 			}while(cursor.moveToNext());
 		}
-		
+		db.close();
 		return listaUsuario;
 	}
 
@@ -155,6 +156,7 @@ public Tarifa selectAllTarifa(Context contexto,Integer hora){
 			
 		}while(cursor.moveToNext());
 	}
+	db.close();
 	return Lista;
 }
 
@@ -180,7 +182,7 @@ public ArrayList<ItemTablita> BuscarTabla(Context contexto){
 			listaTabla.add(item);
 		}while(cursor.moveToNext());
 	}
-	
+	db.close();
 	return listaTabla;
 }
 
@@ -234,7 +236,7 @@ public ArrayList<ItemTablita> BuscarPorDestino(Context contexto,String Parametro
 			listaTarjetas.add(item);
 		}while(cursor.moveToNext());
 	}
-	
+	db.close();
 	return listaTarjetas;
 }
 
@@ -263,7 +265,7 @@ public ArrayList<ItemConsulta> listarConsulta(Context contexto){
 		//	listaConsultas.add(item);
 		}while(cursor.moveToNext());
 	}
-	
+	db.close();
 	return listaConsultas;
  }
 
@@ -275,7 +277,7 @@ public ArrayList<ItemConsulta> BuscarPorFecha(Context contexto, Integer id_u, St
 	listarcarreras = new ArrayList<ItemConsulta>();
 	String[] parametrosBusqueda = new String[]{id_u.toString(), fecha_desde.toString(), fecha_hasta.toString()};
 	String sql = "Select origen, destino, km, valor From " +TABLA_NAME2+
-							" WHERE id_usuario=? and fecha>=? and fecha<=?";
+							" WHERE id_usuario=? and fecha BETWEEN ? and ?";
 	Cursor cursor = db.rawQuery(sql, parametrosBusqueda);
 		if(cursor.moveToFirst()){
 				do{
@@ -331,9 +333,8 @@ public ArrayList<ItemCarrera> ListaCarreras(Context contexto, Integer id_usuario
 	SQLiteDatabase  db = tarjetaDB.getReadableDatabase();
 	
 	listaTabla = new ArrayList<ItemCarrera>();
-	
-	String[] parametrosDeBusqueda= new String[]{id_usuario.toString()};
-	String sql="SELECT c.id_c, c.origen, c.destino, c.fecha FROM carrera  c WHERE c.id_usuario = ? ";
+	String[] parametrosDeBusqueda = new String[]{id_usuario.toString()};
+	String sql="SELECT c.id_c, c.origen, c.destino, c.fecha FROM carrera  c WHERE c.id_usuario = ?";
 	Cursor cursor=db.rawQuery(sql, parametrosDeBusqueda);
 
 	if(cursor.moveToFirst()){
@@ -357,12 +358,12 @@ public ArrayList<ItemCarrera> ListaCarreras(Context contexto, Integer id_usuario
 			
 		}while(cursor.moveToNext());
 	}
-	
+	db.close();
 	return listaTabla;
 }
 
 
-public ArrayList<ItemCarrera> BuscarDestino(Context contexto,String Parametro){
+public ArrayList<ItemCarrera> BuscarDestino(Context contexto,String Parametro, Integer id_usuario){
 	
 	ArrayList<ItemCarrera> listaTabla=null;
 	
@@ -375,19 +376,50 @@ public ArrayList<ItemCarrera> BuscarDestino(Context contexto,String Parametro){
 	//Cursor cursor = db.query(TABLA_NAME, new String[]{"tar_titular","tar_nombre","tar_numero"}, 
 		//	null,null,null,null,"tar_nombre");
 	
-	String[] parametrosDeBusqueda=new String[]{"%"+Parametro+"%","%"+Parametro+"%"};
-	String sql="SELECT id_c, origen, destino, fecha FROM carrera  WHERE origen like ? or destino like ?";
+	String[] parametrosDeBusqueda=new String[]{id_usuario.toString(), "%"+Parametro+"%","%"+Parametro+"%"};
+	String sql="SELECT c.id_c, c.origen, c.destino, c.fecha FROM carrera  c  WHERE  c.id_usuario = ? and (c.origen like ? or c.destino like ?)";
 	Cursor cursor=db.rawQuery(sql, parametrosDeBusqueda);
 
 	if(cursor.moveToFirst()){
 		
 		// Recorrer los resultados
 		do{
-			ItemCarrera item= new ItemCarrera(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getDouble(5),cursor.getString(6),cursor.getString(7));
+			ItemCarrera item= new ItemCarrera();
+			item.setIdCarrera(cursor.getInt(0));
+			item.setOrigen(cursor.getString(1));
+			item.setDestino(cursor.getString(2));
+			item.setFecha(cursor.getString(3));
 			listaTabla.add(item);
-			}while(cursor.moveToNext());
+		}while(cursor.moveToNext());
 	}
-	
+	db.close();
 	return listaTabla;
 }
+
+public ItemCarrera Buscar(Context contexto, Integer id_carrera){
+	 ItemCarrera prod=null;
+		
+		// COnexion a la BD
+	 SqlTaximetro tarjetaDB =new SqlTaximetro(contexto,DB_NAME,null,1);
+		SQLiteDatabase  db = tarjetaDB.getReadableDatabase();
+		
+		String[] parametrosDeBusqueda=new String[]{id_carrera.toString()};
+		String sql="SELECT c.id_c, p.nombres,p.apellidos, c.origen,c.destino, c.valor, c.km, c.fecha,c.latitud_origen,c.longitud_origen FROM carrera c, personas p , usuarios u WHERE u.id_persona=p.id_p and c.id_usuario = u.id_u and c.id_c = ?";
+		Cursor cursor=db.rawQuery(sql, parametrosDeBusqueda);
+
+		if(cursor.moveToFirst()){
+			
+			// Recorrer los resultados
+			do{
+				prod=new ItemCarrera(cursor.getInt(0),cursor.getString(1),
+						cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getDouble(5),cursor.getDouble(6),cursor.getString(7),cursor.getDouble(8),cursor.getDouble(9));
+			}while(cursor.moveToNext());
+		}
+		db.close();
+		return prod;
+	}
+
+
+
+
 }

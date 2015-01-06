@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class ConsultasActivity extends Activity {
 	TextView num_carrera, total;
@@ -61,13 +62,43 @@ public class ConsultasActivity extends Activity {
 
 	public void onBuscar(View Button){
 		lista = (ListView)findViewById(R.id.listViewConsulta);
-		String fecha_desde = desde.getDayOfMonth()+"/"+desde.getMonth()+"/"+desde.getYear();
-		String fecha_hasta = hasta.getDayOfMonth()+"/"+hasta.getMonth()+"/"+hasta.getYear();
+		String dia="", mes="";
+		if(desde.getMonth()+1 >=1 && desde.getMonth()+1 <=9){
+			mes = "0"+(desde.getMonth() +1);
+		}else{
+			mes = ""+(desde.getMonth() +1);
+		}
+		
+		if(desde.getDayOfMonth()>=1 && desde.getDayOfMonth() <=9){
+			dia = "0"+(desde.getDayOfMonth());
+		}else{
+			dia = ""+(desde.getDayOfMonth());
+		}
+		String fecha_desde = dia+"/"+mes+"/"+desde.getYear();
+		
+		//Toast.makeText(this, "fecha"+fecha_desde, Toast.LENGTH_LONG).show();
+		
+		if(hasta.getMonth()+1 >=1 && hasta.getMonth()+1 <=9){
+			mes = "0"+(hasta.getMonth() +1);
+		}else{
+			mes = ""+(hasta.getMonth() +1);
+		}
+		
+		if(hasta.getDayOfMonth()>=1 && hasta.getDayOfMonth() <=9){
+			dia = "0"+(hasta.getDayOfMonth());
+		}else{
+			dia = ""+(hasta.getDayOfMonth());
+		}
+
+		String fecha_hasta = dia+"/"+mes+"/"+hasta.getYear();
 				
+		
 		DBTaximetro dbTaximetro = new DBTaximetro();
+		
 		ArrayList<ItemConsulta> listarCarrera = dbTaximetro.BuscarPorFecha(this,id_usuario, fecha_desde, fecha_hasta);
 		CustomListViewAdapterConsulta customAdapter = new CustomListViewAdapterConsulta(this, R.layout.activity_item__result, listarCarrera);
 		lista.setAdapter(customAdapter); 
+		
 		num_carrera.setText(" "+dbTaximetro.numero_de_carreras(this, id_usuario, fecha_desde, fecha_hasta));
 		total.setText(" $ "+dbTaximetro.valor_total(this, id_usuario, fecha_desde, fecha_hasta));
 	}

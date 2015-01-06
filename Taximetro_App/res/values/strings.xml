@@ -43,5 +43,6 @@
     <string name="text_cancelar">Cancelar</string>
     <string name="title_activity_tabla_carreras">TablaCarrerasActivity</string>
     <string name="title_activity_item_carrera">ItemCarreraActivity</string>
+    <string name="title_activity_detalle_carrera">DetalleCarreraActivity</string>
 
 </resources>

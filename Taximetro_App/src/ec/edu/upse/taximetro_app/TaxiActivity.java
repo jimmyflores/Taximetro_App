@@ -40,7 +40,6 @@ import android.widget.ToggleButton;
 
 public class TaxiActivity extends Activity implements LocationListener{
 	
-	
 	TextView et_Km, et_$, et_TipoTarifa;
 	EditText et_Partida, et_Llegada;
 	Button Guardar, Cancelar;
