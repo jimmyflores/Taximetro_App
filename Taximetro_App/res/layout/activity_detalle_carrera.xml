@@ -68,13 +68,13 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textViewO1"
+                android:id="@+id/textViewo1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Origen:" />
 
             <TextView
-                android:id="@+id/textViewO2"
+                android:id="@+id/textView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
@@ -134,6 +134,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha:" />
+
+            <TextView
+                android:id="@+id/textViewFe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
         </TableRow>
 
         <TableRow

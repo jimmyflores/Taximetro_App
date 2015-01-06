@@ -37,7 +37,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAc1mh1H-UzJDHwkHCB89IuRmozQ9dA0Ys" />
+            android:value="AIzaSyA7n3QQXyNB1UbXUN3S8yuKWQ8J-OLfYZk" />
 
         <activity
             android:name="ec.edu.upse.taximetro_app.MainActivity"

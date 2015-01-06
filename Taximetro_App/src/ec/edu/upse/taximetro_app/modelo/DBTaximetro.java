@@ -404,7 +404,7 @@ public ItemCarrera Buscar(Context contexto, Integer id_carrera){
 		SQLiteDatabase  db = tarjetaDB.getReadableDatabase();
 		
 		String[] parametrosDeBusqueda=new String[]{id_carrera.toString()};
-		String sql="SELECT c.id_c, p.nombres,p.apellidos, c.origen,c.destino, c.valor, c.km, c.fecha,c.latitud_origen,c.longitud_origen FROM carrera c, personas p , usuarios u WHERE u.id_persona=p.id_p and c.id_usuario = u.id_u and c.id_c = ?";
+		String sql="SELECT c.id_c, p.nombres,p.apellidos, c.origen,c.destino, c.valor, c.km, c.fecha,c.latitud_origen,c.longitud_origen,c.latitud_destino,c.longitud_destino FROM carrera c, personas p , usuarios u WHERE u.id_persona=p.id_p and c.id_usuario = u.id_u and c.id_c = ?";
 		Cursor cursor=db.rawQuery(sql, parametrosDeBusqueda);
 
 		if(cursor.moveToFirst()){
@@ -412,7 +412,7 @@ public ItemCarrera Buscar(Context contexto, Integer id_carrera){
 			// Recorrer los resultados
 			do{
 				prod=new ItemCarrera(cursor.getInt(0),cursor.getString(1),
-						cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getDouble(5),cursor.getDouble(6),cursor.getString(7),cursor.getDouble(8),cursor.getDouble(9));
+						cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getDouble(5),cursor.getDouble(6),cursor.getString(7),cursor.getDouble(8),cursor.getDouble(9),cursor.getDouble(10),cursor.getDouble(11));
 			}while(cursor.moveToNext());
 		}
 		db.close();

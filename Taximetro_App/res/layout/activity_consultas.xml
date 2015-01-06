@@ -42,7 +42,8 @@
         <DatePicker
             android:id="@+id/datePickerDesde"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false" />
 
         <TableRow
             android:id="@+id/tableRow3"
@@ -60,7 +61,8 @@
         <DatePicker
             android:id="@+id/datePickerHast"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false" />
 
         <TableRow
             android:id="@+id/tableRow4"

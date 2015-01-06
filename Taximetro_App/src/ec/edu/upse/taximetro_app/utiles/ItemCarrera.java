@@ -11,9 +11,16 @@ public class ItemCarrera {
 	private String fecha;
 	private Double latitud;
 	private Double longitud;
+	private Double latitud_destino;
+	private Double longitud_destino;
+	public ItemCarrera() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public ItemCarrera(int idCarrera, String nombre, String apellido,
 			String origen, String destino, Double costo, Double km,
-			String fecha, Double latitud, Double longitud) {
+			String fecha, Double latitud, Double longitud,
+			Double latitud_destino, Double longitud_destino) {
 		super();
 		this.idCarrera = idCarrera;
 		Nombre = nombre;
@@ -25,10 +32,8 @@ public class ItemCarrera {
 		this.fecha = fecha;
 		this.latitud = latitud;
 		this.longitud = longitud;
-	}
-	public ItemCarrera() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.latitud_destino = latitud_destino;
+		this.longitud_destino = longitud_destino;
 	}
 	public int getIdCarrera() {
 		return idCarrera;
@@ -90,7 +95,17 @@ public class ItemCarrera {
 	public void setLongitud(Double longitud) {
 		this.longitud = longitud;
 	}
-	
-	
-	
+	public Double getLatitud_destino() {
+		return latitud_destino;
+	}
+	public void setLatitud_destino(Double latitud_destino) {
+		this.latitud_destino = latitud_destino;
+	}
+	public Double getLongitud_destino() {
+		return longitud_destino;
+	}
+	public void setLongitud_destino(Double longitud_destino) {
+		this.longitud_destino = longitud_destino;
+	}
+		
 }

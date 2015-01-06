@@ -46,12 +46,13 @@ LocationListener{
 			// TODO: handle exception
 		}
 		
-		TextView textviewOrigen = (TextView) findViewById(R.id.textViewO1);
+		TextView textviewOrigen = (TextView) findViewById(R.id.textView01);
 		TextView textviewNombre = (TextView) findViewById(R.id.textViewNombresD);
 		TextView textviewApellido = (TextView) findViewById(R.id.textViewApellidosD);
 		TextView textviewDestino = (TextView) findViewById(R.id.textViewD2);
 		TextView textviewKm = (TextView) findViewById(R.id.textViewKm2);
 		TextView textviewCosto = (TextView) findViewById(R.id.textViewCosto2);
+		TextView textviewFecha = (TextView) findViewById(R.id.textViewFe);
 		
 		
 		Intent intent = this.getIntent();
@@ -65,6 +66,7 @@ LocationListener{
 		textviewDestino.setText(cl.getDestino());
 		textviewKm.setText(cl.getKm().toString());
 		textviewCosto.setText(cl.getCosto().toString());
+		textviewFecha.setText(cl.getFecha());
 		
 		mapa = ((MapFragment)
 				getFragmentManager().findFragmentById(R.id.fragmentMapaD)).getMap();
@@ -80,7 +82,11 @@ LocationListener{
 						mapa.getUiSettings().setCompassEnabled(true);
 						
 						agregarMarca(cl.getLatitud(), cl.getLongitud(),
-								"Mi marca", "Esta es mi direccion");
+								"Origen", "Direccion de Origen");
+						agregarMarca(cl.getLatitud_destino(), cl.getLongitud_destino(),
+								"Destino", "Direccion de Destino");
+						
+						
 					}
 		//agregarMarca(cl.getLatitud(), cl.getLongitud(), "ubica", 
 			//	 "Ubicacion actual");*/
@@ -93,7 +99,7 @@ LocationListener{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.detalle_carrera, menu);
 		return true;
-	}
+	}	
 
 	public void agregarMarca(double latitud, double longitud,
 			String titulo, String mensaje){

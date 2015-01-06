@@ -44,6 +44,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 	EditText et_Partida, et_Llegada;
 	Button Guardar, Cancelar;
 	ToggleButton button_O_O;
+	Button btnguardar;
     Chronometer CronometroTiempo;
     
 		// daclarar variable que representa al mapa
@@ -112,6 +113,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 		et_Partida = (EditText) findViewById(R.id.editTextPar);
 		et_Llegada = (EditText) findViewById(R.id.editTextLleg);
 		button_O_O = (ToggleButton) findViewById(R.id.toggleButtonSat);
+		btnguardar = (Button) findViewById(R.id.buttonGuardar);
 //	 	mapa = ((MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMapas)).getMap();
  	}
 	
@@ -125,6 +127,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 	
 	public void ON_OFF(View v){				
 		if(button_O_O.isChecked()){	// ON-----------------------------------------------------------------------------
+			btnguardar.setEnabled(false);
 			CronometroTiempo.setBase(SystemClock.elapsedRealtime());
 			Limpiar();
 			costoTotalCarrera = Tarifa_arranque;
@@ -190,6 +193,7 @@ public class TaxiActivity extends Activity implements LocationListener{
 		else{
 			Toast.makeText(this, "location es nula _btnOFF", Toast.LENGTH_SHORT).show();
 		}
+		btnguardar.setEnabled(true);
 		}	
 	}
 	
@@ -227,7 +231,7 @@ public class TaxiActivity extends Activity implements LocationListener{
     		kilometrosRecorridos,costoCarrera,
     			""+et_Partida.getText(),latitud_inicio,longitud_inicio,
     			""+et_Llegada.getText(),latitud_final,longitud_final,getFechaActual(),""+CronometroTiempo.getText());
-    			crearMensaje(1,"Carrera Guardada Exitosamente");
+    			crearMensaje(1,"Carrera Guardada Exitosamente"+latitud_inicio+" "+latitud_final);
 	    		Limpiar();
     	}	
 	}

@@ -44,7 +44,7 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textViewO2"
+        android:id="@+id/textViewo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewO1"
@@ -55,8 +55,8 @@
         android:id="@+id/textViewFe2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewO2"
-        android:layout_alignBottom="@+id/textViewO2"
+        android:layout_alignBaseline="@+id/textViewo1"
+        android:layout_alignBottom="@+id/textViewo1"
         android:layout_alignLeft="@+id/textViewDes2"
         android:text="TextView" />
 
