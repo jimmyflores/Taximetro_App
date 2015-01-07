@@ -23,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/consulta" />
-
         </TableRow>
 
         <TableRow
@@ -36,7 +35,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Desde" />
-
         </TableRow>
 
         <DatePicker
@@ -55,7 +53,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hasta:" />
-
         </TableRow>
 
         <DatePicker
@@ -80,7 +77,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="onBuscar"
                 android:text="Buscar" />
-
         </TableRow>
 
         <TableRow
@@ -93,7 +89,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Resultados:" />
-
         </TableRow>
 
         <TableRow
@@ -118,18 +113,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Valor" />
-
         </TableRow>
 
         <LinearLayout
+            android:id="@+id/LinearLayout1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
             <ListView
                 android:id="@+id/listViewConsulta"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
+                android:layout_height="148dp" >
+
             </ListView>
         </LinearLayout>
 
@@ -185,9 +181,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="onRegresar"
                 android:text="Regresar" />
-
         </TableRow>
-
     </TableLayout>
 
 </ScrollView>
