@@ -12,8 +12,8 @@
         android:id="@+id/textViewValorCCVista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textViewRutaVista"
-        android:layout_alignBottom="@+id/textViewRutaVista"
+        android:layout_alignBaseline="@+id/textViewOrigenVista"
+        android:layout_alignBottom="@+id/textViewOrigenVista"
         android:layout_alignParentRight="true"
         android:layout_marginRight="14dp"
         android:text="$ 0.00" />
@@ -28,11 +28,20 @@
         android:text="0 Km" />
 
     <TextView
-        android:id="@+id/textViewRutaVista"
+        android:id="@+id/textViewOrigenVista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:text="---" />
+
+    <TextView
+        android:id="@+id/textViewDestinoVista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewOrigenVista"
         android:layout_marginLeft="16dp"
         android:text="---" />
 

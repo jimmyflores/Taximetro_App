@@ -292,7 +292,6 @@ containing a value of this type.
         public static final int tableRow9=0x7f050013;
         public static final int terrain=0x7f050003;
         public static final int textView01=0x7f050027;
-        public static final int textView1=0x7f05002e;
         public static final int textView11=0x7f050030;
         public static final int textView2=0x7f05002c;
         public static final int textView3=0x7f050022;
@@ -308,6 +307,7 @@ containing a value of this type.
         public static final int textViewDes2=0x7f05000f;
         public static final int textViewDesd=0x7f050009;
         public static final int textViewDest=0x7f05003e;
+        public static final int textViewDestinoVista=0x7f05002e;
         public static final int textViewDistanciaVista=0x7f05003a;
         public static final int textViewFe=0x7f05002f;
         public static final int textViewFe2=0x7f050020;
@@ -323,11 +323,11 @@ containing a value of this type.
         public static final int textViewOri=0x7f05003b;
         public static final int textViewOri2=0x7f05003c;
         public static final int textViewOrig=0x7f05003d;
+        public static final int textViewOrigenVista=0x7f050039;
         public static final int textViewPartid=0x7f050033;
         public static final int textViewRecorrido=0x7f05005d;
         public static final int textViewResultados=0x7f050012;
         public static final int textViewRuta=0x7f05001a;
-        public static final int textViewRutaVista=0x7f050039;
         public static final int textViewTiemp=0x7f050014;
         public static final int textViewTipoTarifa=0x7f05005c;
         public static final int textViewUsuario=0x7f050044;

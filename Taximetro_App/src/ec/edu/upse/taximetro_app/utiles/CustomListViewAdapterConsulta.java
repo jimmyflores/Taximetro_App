@@ -21,7 +21,8 @@ public class CustomListViewAdapterConsulta  extends ArrayAdapter<ItemConsulta>{
     }
     
     private class ViewHolder {
-        TextView txtRuta;
+        TextView txtOrigen;
+        TextView txtDestino;
         TextView txtDistancia;  
         TextView txtValorCC;
     }
@@ -37,7 +38,8 @@ public class CustomListViewAdapterConsulta  extends ArrayAdapter<ItemConsulta>{
             convertView = mInflater.inflate(R.layout.activity_item__result, null);
             
             holder = new ViewHolder();
-            holder.txtRuta = (TextView) convertView.findViewById(R.id.textViewRutaVista);
+            holder.txtOrigen = (TextView) convertView.findViewById(R.id.textViewOrigenVista);
+            holder.txtDestino = (TextView) convertView.findViewById(R.id.textViewDestinoVista);
             holder.txtDistancia = (TextView) convertView.findViewById(R.id.textViewDistanciaVista);
             holder.txtValorCC = (TextView) convertView.findViewById(R.id.textViewValorCCVista);
             
@@ -45,7 +47,8 @@ public class CustomListViewAdapterConsulta  extends ArrayAdapter<ItemConsulta>{
         } else
             holder = (ViewHolder) convertView.getTag();
  
-        holder.txtRuta.setText(item.getOrigen() +" - " + item.getDestino());
+        holder.txtOrigen.setText(item.getOrigen());
+        holder.txtDestino.setText(item.getDestino());
         holder.txtDistancia.setText(Double.toString(item.getDistancia())+" Km");
         holder.txtValorCC.setText("$ "+Double.toString(item.getValor()));
         

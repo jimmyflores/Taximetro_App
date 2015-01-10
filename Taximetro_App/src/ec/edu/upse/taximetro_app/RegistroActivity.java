@@ -33,13 +33,13 @@ public class RegistroActivity extends Activity {
 		setContentView(R.layout.activity_registro);
 		Inicializar();
 		
-		/*btn_Registro.setOnClickListener(new OnClickListener() {
+		btn_Registro.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				WSRegistro registro = new WSRegistro();
 				registro.execute();
 			}
-		});*/
+		});
 		
 	}
 
@@ -59,7 +59,7 @@ public class RegistroActivity extends Activity {
 	}
 	
 	
-/*	private class WSRegistro extends AsyncTask<String, Integer, Boolean>{
+	private class WSRegistro extends AsyncTask<String, Integer, Boolean>{
 
 		@Override
 		protected Boolean doInBackground(String... params) {
@@ -115,7 +115,7 @@ public class RegistroActivity extends Activity {
 		}
 		
 	}
-	*/
+	
 	public void Cancelar_Evento(View boton){
 		Intent intent =new Intent(this,MainActivity.class);
 		startActivity(intent);

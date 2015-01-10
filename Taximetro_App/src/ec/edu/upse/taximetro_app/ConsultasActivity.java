@@ -104,8 +104,7 @@ public class ConsultasActivity extends Activity {
 	}
 	
 	public void onRegresar(View boton){
-		Intent intent =new Intent(this,FuncionesActivity.class);
-		startActivity(intent);
+		this.finish();
 	}
 	
 }
