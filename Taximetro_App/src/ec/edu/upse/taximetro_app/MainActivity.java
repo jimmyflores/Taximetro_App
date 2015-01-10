@@ -23,8 +23,11 @@ import ec.edu.upse.taximetro_app.modelo.DBTaximetro;
 import ec.edu.upse.taximetro_app.modelo.Usuario;
 import ec.edu.upse.taximetro_app.utiles.ItemDeUsuario;
 import ec.edu.upse.taximetro_app.ws.ManejadorWS;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -45,6 +48,13 @@ public class MainActivity extends Activity {
         
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		if(!verificarConexion(this))
+		{
+			Toast.makeText(getBaseContext(),
+		            "Comprueba tu conexión a Internet.... ", Toast.LENGTH_SHORT)
+		            .show();
+		    
+		}
     
 	}
 
@@ -159,6 +169,21 @@ public class MainActivity extends Activity {
 	
 	} 
     
-
+public static boolean verificarConexion(Context ctx)
+{
+	boolean bConectado =false;
+		ConnectivityManager connec = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+		//no solo wifi, tambien GPRS
+		NetworkInfo[] redes = connec.getAllNetworkInfo();
+		for(int i =0; i<2; i++)
+		{
+			if(redes[i].getState()==NetworkInfo.State.CONNECTED)
+			{
+				bConectado=true;
+			}
+		}
+		
+	return bConectado;
+}
 }
 
