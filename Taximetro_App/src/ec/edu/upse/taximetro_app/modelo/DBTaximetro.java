@@ -25,14 +25,14 @@ public class DBTaximetro {
 	private static final String DB_NAME = "DBTaximetro";
 	
 	public void nuevoUsuario(Context contexto, String nombres, String apellidos,
-			String email, String usuario, String clave){
+			String email, String usuario, String clave, String estado_envio){
 		Integer id_persona = 0;
 		SqlTaximetro clienteDB= new SqlTaximetro(contexto, DB_NAME, null, 1);
 		SQLiteDatabase db = clienteDB.getWritableDatabase();
 		
 		if (db!=null){
 			db.execSQL("INSERT INTO "+TABLA_NAME +" VALUES (NULL,'" +nombres+ "', " +
-					"'"+apellidos+"', '"+email+"','A')");
+					"'"+apellidos+"', '"+email+"','A','"+estado_envio+"')");
 		}
 		db.close();
 		
@@ -53,7 +53,7 @@ public class DBTaximetro {
 		SQLiteDatabase dbg = UserBd.getWritableDatabase();
 		if(dbg!= null){
 			dbg.execSQL("INSERT INTO "+TABLA_NAME1+" VALUES" +
-					"(NULL,"+id_persona+",'"+usuario+"','"+clave+"','A')");
+					"(NULL,"+id_persona+",'"+usuario+"','"+clave+"','A','"+estado_envio+"')");
 		}
 		dbg.close();
 	}
@@ -76,7 +76,8 @@ public class DBTaximetro {
 	
 	public void nuevaCarrera(Context contexto,Integer id_usuario, Integer id_tarifa, Double km, Double valor,
 			String origen, Double latitud_origen,Double longitud_origen, String destino, 
-			Double latitud_destino,Double longitud_destino, String fecha, String duracion_carrera ){
+			Double latitud_destino,Double longitud_destino, String fecha, String duracion_carrera, String estado_envio){
+		
 		SqlTaximetro carrera= new SqlTaximetro(contexto, DB_NAME, null, 1);
 		SQLiteDatabase db = carrera.getWritableDatabase();
 		
@@ -84,16 +85,14 @@ public class DBTaximetro {
 			db.execSQL("INSERT INTO "+TABLA_NAME2 +" VALUES (NULL,"+id_usuario+ ","+id_tarifa+ ", " +
 					""+km+ ","+valor+", '"+origen+ "', "+latitud_origen+","+longitud_origen+", " +
 							"'"+destino+ "',"+latitud_destino+","+longitud_destino+",'"+fecha+ "'," +
-									"'"+duracion_carrera+"')");
+									"'"+duracion_carrera+"','"+estado_envio+"')");
 		}
 		db.close();
 	}
 	
 	
 	public Usuario Listalogin(Context contexto, String usuario, String clave){
-		
 		Usuario listaUsuario=null;
-
 		// COnexion a la BD
 		SqlTaximetro tarjetaDB =new SqlTaximetro(contexto,DB_NAME,null,1);
 		// Referencia a la BD
@@ -162,9 +161,7 @@ public Tarifa selectAllTarifa(Context contexto,Integer hora){
 
 
 public ArrayList<ItemTablita> BuscarTabla(Context contexto){
-	
 	ArrayList<ItemTablita> listaTabla=null;
-	
 	SqlTaximetro tarjetaDB =new SqlTaximetro(contexto,DB_NAME,null,1);
 	SQLiteDatabase  db = tarjetaDB.getReadableDatabase();
 	

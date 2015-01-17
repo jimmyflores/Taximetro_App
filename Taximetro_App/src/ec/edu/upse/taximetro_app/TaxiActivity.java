@@ -230,8 +230,8 @@ public class TaxiActivity extends Activity implements LocationListener{
     		dbTaxi.nuevaCarrera(this, id_usuario , tarifa.getId(),
     		kilometrosRecorridos,costoCarrera,
     			""+et_Partida.getText(),latitud_inicio,longitud_inicio,
-    			""+et_Llegada.getText(),latitud_final,longitud_final,getFechaActual(),""+CronometroTiempo.getText());
-    			crearMensaje(1,"Carrera Guardada Exitosamente"+latitud_inicio+" "+latitud_final);
+    			""+et_Llegada.getText(),latitud_final,longitud_final,getFechaActual(),""+CronometroTiempo.getText(),"NE");
+    			crearMensaje(1,"Carrera Guardada Exitosamente");
 	    		Limpiar();
     	}	
 	}
@@ -277,7 +277,7 @@ public void crearMensaje(int numBotones, String Mensaje){
 		// TODO Auto-generated method stub
 				
 				float velocidad = location.getSpeed();
-				total_segundos =  (float) (total_segundos + 0.25);
+				total_segundos =  (float)(total_segundos + 0.25);
 				distancia_total = distancia_total + (velocidad * 0.25);
 				Integer metros_comparacion = 0;
 				Double cambio_velocidad = 3.33; //m/seg

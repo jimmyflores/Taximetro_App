@@ -12,7 +12,8 @@ public class SqlTaximetro extends SQLiteOpenHelper {
 			" nombres TEXT," +
 			" apellidos TEXT," +
 			" email TEXT," +
-			" estado TEXT )";
+			" estado TEXT, " +
+			" estado_envio TEXT )"; // (E) dato enviado (NE) dato no enviado 
 	
 	
 	String sql1 = "CREATE TABLE usuarios (" +
@@ -20,7 +21,8 @@ public class SqlTaximetro extends SQLiteOpenHelper {
 			" id_persona INTEGER NOT NULL," +
 			" usuario TEXT," +
 			" clave TEXT," +
-			" estado TEXT, " +
+			" estado TEXT," +
+			" estado_envio TEXT, " +
 			"FOREIGN KEY (id_persona) REFERENCES personas(id_p))";
 	
 	String sqtabla = "CREATE TABLE ttarifa (" +
@@ -42,10 +44,11 @@ public class SqlTaximetro extends SQLiteOpenHelper {
 			" destino TEXT," +
 			" latitud_destino DOUBLE," +
 			" longitud_destino DOUBLE," +
-			" fecha TEXT, " +
-			" duracion_carrera TEXT, " +
-			"FOREIGN KEY (id_usuario) REFERENCES usuarios(id_u), "+
-			"FOREIGN KEY (id_tarifa) REFERENCES tarifa(id_t))";
+			" fecha TEXT," +
+			" duracion_carrera TEXT," +
+			" estado_envio TEXT," +
+			" FOREIGN KEY (id_usuario) REFERENCES usuarios(id_u),"+
+			" FOREIGN KEY (id_tarifa) REFERENCES tarifa(id_t))";
 	
 	String sqltarifa = "CREATE TABLE tarifa (" +
 			"id_t INTEGER PRIMARY KEY AUTOINCREMENT," +

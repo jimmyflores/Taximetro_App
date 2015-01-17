@@ -33,14 +33,6 @@ public class RegistroActivity extends Activity {
 		setContentView(R.layout.activity_registro);
 		Inicializar();
 		
-		btn_Registro.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				WSRegistro registro = new WSRegistro();
-				registro.execute();
-			}
-		});
-		
 	}
 
 	@Override
@@ -57,64 +49,7 @@ public class RegistroActivity extends Activity {
 		et_usuario = (EditText) findViewById(R.id.editTextUserRegistro);
 		et_contrasenia = (EditText) findViewById(R.id.editTextPassRegistro);
 	}
-	
-	
-	private class WSRegistro extends AsyncTask<String, Integer, Boolean>{
 
-		@Override
-		protected Boolean doInBackground(String... params) {
-			boolean resul = true;
-			final String NAMESPACE = "";
-			final String URL = "";
-			final String METHOD_NAME = "";
-			final String SOAP_ACTION = "";
-			
-			SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-			request.addProperty("nombres", et_nombres.getText().toString());
-			request.addProperty("apellidos", et_apellidos.getText().toString());
-			request.addProperty("e_mail", et_e_mail.getText().toString());
-			request.addProperty("usuario", et_usuario.getText().toString());
-			request.addProperty("contrasenia", et_contrasenia.getText().toString());
-			
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-			envelope.dotNet = true;
-			envelope.setOutputSoapObject(request);
-			HttpTransportSE transporte = new HttpTransportSE(URL);
-			
-			try {
-				transporte.call(SOAP_ACTION, envelope);
-				SoapPrimitive resultado_xml = (SoapPrimitive)envelope.getResponse();
-				String res = resultado_xml.toString();
-				if(!res.equals("1"))
-					resul = false;
-			
-			} catch (Exception e) {
-				 resul = false;
-			}
-			return resul;
-		}
-		
-		
-		protected void onPostExecute (Boolean result){
-			if (result){
-				AlertDialog.Builder alerta = new AlertDialog.Builder(null);
-				alerta.setTitle("Aviso de la App");
-				alerta.setMessage("Usuario Registrado");
-				alerta.setIcon(R.drawable.ic_launcher);
-				alerta.setPositiveButton("Aceptar", null);
-				alerta.show();
-			}
-			else{
-				AlertDialog.Builder alerta = new AlertDialog.Builder(null);
-				alerta.setTitle("Aviso de la App");
-				alerta.setMessage("Error");
-				alerta.setIcon(R.drawable.ic_launcher);
-				alerta.setPositiveButton("Aceptar", null);
-				alerta.show();
-			}	
-		}
-		
-	}
 	
 	public void Cancelar_Evento(View boton){
 		Intent intent =new Intent(this,MainActivity.class);
@@ -136,7 +71,7 @@ public class RegistroActivity extends Activity {
 		if (isEmpty()){
 			Toast.makeText(this,"Falta(n)de ingresar algun(os) Campo(s)!!", Toast.LENGTH_LONG).show();
     	}else{
-		dbTaxi.nuevoUsuario(this,Nombres, Apellidos, email, Usuario, Clave); //, nombres, apellidos, email, usuario, clave), nombres, apellidos, email, usuario, clave)//nuevoCliente(this, rucCedula, nombre, apellidos,direccion , 0.0, 0.0, rutafoto);
+		dbTaxi.nuevoUsuario(this,Nombres, Apellidos, email, Usuario, Clave, "NE"); //, nombres, apellidos, email, usuario, clave), nombres, apellidos, email, usuario, clave)//nuevoCliente(this, rucCedula, nombre, apellidos,direccion , 0.0, 0.0, rutafoto);
 		Toast.makeText(this, "Guardado", Toast.LENGTH_LONG).show();
 		Limpiar();
 		Intent intent =new Intent(this,MainActivity.class);
