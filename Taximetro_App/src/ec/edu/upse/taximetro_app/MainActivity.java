@@ -29,7 +29,6 @@ import com.google.gson.Gson;
 import ec.edu.upse.taximetro_app.modelo.DBTaximetro;
 import ec.edu.upse.taximetro_app.modelo.Usuario;
 import ec.edu.upse.taximetro_app.servicio.ServicioTaximetro;
-import ec.edu.upse.taximetro_app.servicio.ServicioTaximetro2;
 import ec.edu.upse.taximetro_app.utiles.ItemDeUsuario;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -80,7 +79,7 @@ public class MainActivity extends Activity {
 	
 	//atributos
 	private String NAMESPACE= "http://funciones.servicios.com/";
-	private String URL = "http://10.0.2.2:8080/WebServiceSAAP/services/RegistrarCarreras";
+	private String URL = "http://192.168.1.7:8080/WebServiceSAAP/services/RegistrarCarreras";
 	private String SOAP_ACTION;
 	private String METODO;
 	
@@ -129,44 +128,33 @@ public class MainActivity extends Activity {
     	String Nombre = editTextUsuario.getText().toString();
     	String Clave = editTextPassword.getText().toString();
     		if(!Nombre.equals("") && !Clave.equals("")){
-    			//if(verificarConexion(this)){
+    			if(verificarConexion(this)){
     				if(consultaLoginWS(Nombre, Clave)){
     					Intent intent =new Intent(this,FuncionesActivity.class);
+    					intent.putExtra("id_usuario", ""+0);
+    					intent.putExtra("usuario", Nombre);
     					startActivity(intent);
     				}else{
     		    		Toast.makeText(this, "El Usuario/Clave es incorrecta o el usuario no está registrado", Toast.LENGTH_LONG).show();
     				}
-    			//}
-    			//	else{
-    			//	DBTaximetro dbTaxi = new DBTaximetro();
-    			//	Usuario user = dbTaxi.Listalogin(this, Nombre, Clave);
-    			//	if (user == null)
-    			//	{
-    			//		Toast.makeText(this, "El Usuario/Clave es incorrecta o el usuario no está registrado", Toast.LENGTH_LONG).show();
-    			//	}
-    		//	}
-    				
+    			}
+    			else{
+    				DBTaximetro dbTaxi = new DBTaximetro();
+    				Usuario user = dbTaxi.Listalogin(this, Nombre, Clave);
+    				if (user == null)
+    				{
+    					Toast.makeText(this, "El Usuario/Clave es incorrecta o el usuario no está registrado", Toast.LENGTH_LONG).show();
+    				}else{
+    					Intent intent =new Intent(this,FuncionesActivity.class);
+    		    		intent.putExtra("id_usuario", ""+user.getId());
+    		    		intent.putExtra("usuario", user.getNombre_usuario());
+    		    		startActivity(intent);
+    		    		Limpiar();
+    				}
+    			}				
     		}else{
     			Toast.makeText(this, "No se puede iniciar con campos vacios", Toast.LENGTH_LONG).show();
     		}
-    		
-    	/*DBTaximetro dbTaxi = new DBTaximetro();
-    	Usuario user = dbTaxi.Listalogin(this, Nombre, Clave);
-    	if (user == null)
-    	{
-    		Toast.makeText(this, "El Usuario/Clave es incorrecta o el usuario no está registrado", Toast.LENGTH_LONG).show();
-    	}
-    	
-    	else
-    	{
-    			
-    		Intent intent =new Intent(this,FuncionesActivity.class);
-    		intent.putExtra("id_usuario", ""+user.getId());
-    		intent.putExtra("usuario", user.getNombre_usuario());
-    		//Toast.makeText(this, "usuario: "+user.getId(), Toast.LENGTH_LONG).show();
-    		startActivity(intent);
-    		Limpiar();   	
-    	}*/
 	}
 	
 	private Boolean consultaLoginWS(String usuario, String contrasenia){

@@ -45,9 +45,9 @@ public class ServicioTaximetro extends Service{
 		
 	
 	static String NAMESPACE = "http://funciones.servicios.com/";
-	static String URL ="http://10.0.2.2:8080/WebServiceSAAP/services/RegistrarCarreras";
-	String METODO;// = "NuevoClienteSimple";
-	String SOAP_ACTION;// = "http://sgoliver.net/NuevoClienteSimple";
+	static String URL ="http://192.168.1.7:8080/WebServiceSAAP/services/RegistrarCarreras";
+	String METODO;
+	String SOAP_ACTION;
 	
 	@Override
 	public IBinder onBind(Intent arg0){
@@ -59,7 +59,6 @@ public class ServicioTaximetro extends Service{
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		Toast.makeText(getApplicationContext(), "---servicio iniciado....", Toast.LENGTH_LONG).show();
 		EnviarDatos();
 	}
 
@@ -88,14 +87,12 @@ public class ServicioTaximetro extends Service{
 	
 	
 	public void EnviarDatos(){
-		/*System.out.println("");
 		t.scheduleAtFixedRate(new TimerTask() {		
 			@Override
 			public void run() {
 				System.out.println("--- Servicio corriendo....");
-				// TODO Auto-generated method stub
-				if(!verificarConexion(ServicioTaximetro.this))
-				{*/
+				if(verificarConexion(ServicioTaximetro.this))
+				{
 					System.out.println("--- Tengo Internet");
 					//conexion con el web service
 					//para envio de datos guardados solo en la base local
@@ -114,10 +111,10 @@ public class ServicioTaximetro extends Service{
 								ActualizarUsuario(listaUsuarios.get(i));
 							}
 						}
-					}/*
+					}
 				}
 			}
-		}, 0, UPDATE_INTERVAL);*/
+		}, 0, UPDATE_INTERVAL);
 	}
 	
 	String strJSON;
@@ -182,31 +179,10 @@ public class ServicioTaximetro extends Service{
 		db.ActualizarEnvios(this, user);	
 	}
 	
-	Gson gson = null;
-	
-	private void crearLista(String strJson){
-		//se crea el objeto que ayuda deserealizar la cadena JSON
-		gson = new Gson();
-
-		//Obtenemos el tipo de un ArrayList
-		Type lstT = new TypeToken< ArrayList>(){}.getType();
-
-		//Creamos una objeto ArrayList
-		ArrayList arrListAOS = new ArrayList();
-
-		//Deserealizamos la cadena JSON para que se convertida a un ArrayList
-		arrListAOS = gson.fromJson(strJson, lstT);
-		Log.i("Local Service", "Datos recividos correctamente");
-		//Asignaos la ArrayList al controls ListView para mostrar
-		//la lista de SO Android que se consumieron del web service
-		//lista.setAdapter(new ArrayAdapter (getApplication(), android.R.layout.simple_list_item_1, arrListAOS));
-	}
-	
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		super.onDestroy();
-		
+		super.onDestroy();	
 	}
 
 	@Override
