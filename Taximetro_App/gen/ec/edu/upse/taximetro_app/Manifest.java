@@ -9,6 +9,6 @@ package ec.edu.upse.taximetro_app;
 
 public final class Manifest {
     public static final class permission {
-        public static final String MAPS_RECEIVE="ec.edu.upse.mapasylocalizacion.permission.MAPS_RECEIVE";
+        public static final String MAPS_RECEIVE="ec.edu.upse.taximetro_app.permission.MAPS_RECEIVE";
     }
 }

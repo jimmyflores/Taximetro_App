@@ -35,25 +35,13 @@ public class TablaANTActivity extends Activity {
 		listViewTabla.setAdapter(customAdapter);
 		//CONTROLAR EL EVENTO DE CLICK SOBRE CADA ITEM DE LA LISTA
 		listViewTabla.setOnItemClickListener(new ItemClickListener());
-		
-		
-		
 	}
 
 	class ItemClickListener implements OnItemClickListener{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View item, int position, long id) {
 			// TODO Auto-generated method stub
-			ItemTablita itemDeLista = (ItemTablita)listViewTabla.getItemAtPosition(position);
-	//		Toast.makeText(parent.getContext(), itemDeLista.getTitle(), Toast.LENGTH_LONG).show(); 
-					
-							Intent intent;
-							//intent = new Intent(parent.getContext(), DetalleClienteActivity.class);
-							//startActivity(intent);
-						
-						
-				//intent = new Intent(parent.getContext(), DetalleTarjetaActivity.class);
-			//COLOCAR DATOS EN EL INTENT PARA QUE LLEGUEN A LA SIGUIENTE ACTIVIDAD
+		
 			}
 			
 		}
@@ -78,13 +66,7 @@ public class TablaANTActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.tabla_ant, menu);
+		//getMenuInflater().inflate(R.menu.tabla_ant, menu);
 		return true;
 	}
-	
-	
-	
-	
-	
-
 }

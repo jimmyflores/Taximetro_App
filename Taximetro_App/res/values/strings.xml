@@ -44,5 +44,14 @@
     <string name="title_activity_tabla_carreras">TablaCarrerasActivity</string>
     <string name="title_activity_item_carrera">ItemCarreraActivity</string>
     <string name="title_activity_detalle_carrera">DetalleCarreraActivity</string>
+    <string name="nombre_app">Taximetro</string>
+    <string name="Bienvenida">Bienvenido</string>
+    <string name="registro_usuario">Nuevo Usuario</string>
+    <string name="funciones">¿Qué desea hacer?</string>
+    <string name="taximetro">Registro de Carreras</string>
+    <string name="mapa">Su ubicación</string>
+    <string name="carreras_realizadas">Carreras Registradas</string>
+    <string name="title_activity_custom_dialog">Custom_dialog</string>
+    <string name="text_escoja_fecha">Escoja la Fecha:</string>
 
 </resources>

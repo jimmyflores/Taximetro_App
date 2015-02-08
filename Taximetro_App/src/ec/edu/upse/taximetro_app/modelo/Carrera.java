@@ -3,6 +3,7 @@ package ec.edu.upse.taximetro_app.modelo;
 public class Carrera {
 	private int idCarrera;
 	private int idPersonas;
+	private String Usuario;
 	private int idTarifa;
 	private Double km;
 	private Double valor;
@@ -14,10 +15,20 @@ public class Carrera {
 	private Double longitud_destino;
 	private String fecha;
 	private String Tiempo_carrera;
+	
 	public Carrera() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getUsuario() {
+		return Usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.Usuario = usuario;
+	}
+	
 	public Carrera(int idCarrera, int idPersonas, int idTarifa, Double km,
 			Double valor, String origen, Double latitud_origen,
 			Double longitud_origen, String destino, Double latitud_destino,

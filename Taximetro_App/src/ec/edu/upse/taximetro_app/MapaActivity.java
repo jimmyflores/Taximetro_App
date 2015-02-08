@@ -24,6 +24,7 @@ import android.widget.ToggleButton;
 
 public class MapaActivity extends Activity implements LocationListener{
 	
+
 	Integer id;
 	String nombre_usuario;
 	Double latitud , longitud ;
@@ -78,10 +79,8 @@ public class MapaActivity extends Activity implements LocationListener{
 				latitud = location.getLatitude();
 				longitud = location.getLongitude();
 				agregarMarca(latitud, longitud, "Inicio de Carrera", "Ubicacion actual");
-				Toast.makeText(this,"lat:" +latitud+ " " + "long: " +longitud,Toast.LENGTH_LONG).show();	
 			}else{
-				Toast.makeText(this,"location es null",Toast.LENGTH_LONG).show();
-				
+				Toast.makeText(this,"No se puede obtener Posición Actual...",Toast.LENGTH_LONG).show();
 			}
 		}
 
@@ -120,7 +119,7 @@ public class MapaActivity extends Activity implements LocationListener{
 			mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		}else
 		{
-			//apagado off
+		//apagado off
 			mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 			
 		}
@@ -157,7 +156,7 @@ public void agregarMarca(double latitud, double longitud, String titulo, String 
 	LatLng ubicacion = new LatLng(latitud, longitud);
 	marca.position(ubicacion);
 	marca.title(titulo);
-	marca.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
+	marca.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marca));
 	
 	marca.snippet(mensaje);
 	

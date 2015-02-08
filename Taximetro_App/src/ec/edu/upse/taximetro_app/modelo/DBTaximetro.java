@@ -2,7 +2,7 @@ package ec.edu.upse.taximetro_app.modelo;
 
 import java.util.ArrayList;
 
-import ec.edu.upse.taximetro_app.R;
+//import ec.edu.upse.taximetro_app.R;
 import ec.edu.upse.taximetro_app.utiles.ItemCarrera;
 import ec.edu.upse.taximetro_app.utiles.ItemConsulta;
 import ec.edu.upse.taximetro_app.utiles.ItemDeUsuario;
@@ -90,7 +90,41 @@ public class DBTaximetro {
 		db.close();
 	}
 	
-	
+	public Usuario ListaUsuario(Context contexto, String usuario){
+		Usuario listaUsuario=null;
+		// COnexion a la BD
+		SqlTaximetro tarjetaDB =new SqlTaximetro(contexto,DB_NAME,null,1);
+		// Referencia a la BD
+		SQLiteDatabase  db = tarjetaDB.getReadableDatabase();
+		
+		// Consulta sobre la bd
+		//Cursor cursor = db.query(TABLA_NAME, new String[]{"tar_titular","tar_nombre","tar_numero"}, 
+		//null,null,null,null,"tar_nombre");
+		// si es que existe al menos un resultado
+		String[] parametrosDeBusqueda = new String[]{usuario};
+		String sql = "SELECT user.id_u, user.usuario, person.id_p, person.nombres , person.apellidos, person.email " +
+					 "FROM "+TABLA_NAME1+" as user,"+TABLA_NAME+" as person " +
+				     "WHERE user.usuario = ? and user.estado='A' and person.id_p = user.id_persona";
+				      Cursor cursor = db.rawQuery(sql, parametrosDeBusqueda);	
+			if(cursor.moveToFirst()){
+			// Recorrer los resultados
+			do{
+				listaUsuario = new Usuario();
+								listaUsuario.setId(cursor.getInt(0));
+								listaUsuario.setNombre_usuario(cursor.getString(1));
+								
+								Persona per = new Persona();
+								per.setId(cursor.getInt(2));
+								per.setNombres(cursor.getString(3));
+								per.setApellidos(cursor.getString(4));
+								per.setEmail(cursor.getString(5));
+							
+								listaUsuario.setPersona(per);
+			}while(cursor.moveToNext());
+		}
+		db.close();
+		return listaUsuario;
+	}
 	public Usuario Listalogin(Context contexto, String usuario, String clave){
 		Usuario listaUsuario=null;
 		// COnexion a la BD

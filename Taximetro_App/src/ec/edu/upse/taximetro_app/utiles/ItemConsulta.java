@@ -13,8 +13,15 @@ public class ItemConsulta {
     	this.Distancia = distancia;
     	this.Valor = valor;
 	}
+    
 
-    public String getOrigen() {
+    public ItemConsulta() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public String getOrigen() {
 		return Origen;
 	}
 

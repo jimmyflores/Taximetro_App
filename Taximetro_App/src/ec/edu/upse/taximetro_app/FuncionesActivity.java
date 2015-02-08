@@ -9,8 +9,10 @@ import android.widget.Toast;
 
 public class FuncionesActivity extends Activity {
 
+
 	Integer id;
 	String nombre_usuario;
+	String online;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class FuncionesActivity extends Activity {
 		try {
 		id = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
 		nombre_usuario = intentActual.getStringExtra("usuario");
-		//Toast.makeText(this, "usuario: "+nombre_usuario+" id: "+id, Toast.LENGTH_LONG).show();
+		online = intentActual.getStringExtra("online");
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
@@ -45,6 +47,7 @@ public class FuncionesActivity extends Activity {
 		Intent intent =new Intent(this,Menu_ConsultasActivity.class);
 		intent.putExtra("id_usuario", ""+id);
 		intent.putExtra("usuario", nombre_usuario);
+		intent.putExtra("online", online);
 		startActivity(intent);
 	}
 }

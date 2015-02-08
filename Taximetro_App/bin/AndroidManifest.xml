@@ -9,7 +9,7 @@
         android:targetSdkVersion="17" />
 
     <permission
-        android:name="ec.edu.upse.mapasylocalizacion.permission.MAPS_RECEIVE"
+        android:name="ec.edu.upse.taximetro_app.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="ec.edu.upse.mapasylocalizacion.permission.MAPS_RECEIVE" />
@@ -20,8 +20,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    
-    
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -29,8 +27,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/ic_app"
+        android:label="@string/nombre_app"
         android:theme="@style/AppTheme" >
         <uses-library android:name="com.google.android.maps" />
 
@@ -42,32 +40,34 @@
             android:value="AIzaSyA7n3QQXyNB1UbXUN3S8yuKWQ8J-OLfYZk" />
 
         <service
-            android:enabled="true" 
-            android:name="ec.edu.upse.taximetro_app.servicio.ServicioTaximetro"></service>
-        
+            android:name="ec.edu.upse.taximetro_app.servicio.ServicioTaximetro"
+            android:enabled="true" >
+        </service>
+
         <activity
             android:name="ec.edu.upse.taximetro_app.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/Bienvenida" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="ec.edu.upse.taximetro_app.RegistroActivity"
-            android:label="@string/app_name" >
+            android:label="@string/registro_usuario" >
         </activity>
         <activity
             android:name="ec.edu.upse.taximetro_app.FuncionesActivity"
-            android:label="@string/app_name" >
+            android:label="@string/funciones" >
         </activity>
         <activity
             android:name="ec.edu.upse.taximetro_app.TaxiActivity"
-            android:label="@string/app_name" >
+            android:label="@string/taximetro" >
         </activity>
         <activity
             android:name="ec.edu.upse.taximetro_app.MapaActivity"
-            android:label="@string/title_activity_mapa" >
+            android:label="@string/mapa" >
         </activity>
         <activity
             android:name="ec.edu.upse.taximetro_app.ConsultasActivity"
@@ -75,7 +75,7 @@
         </activity>
         <activity
             android:name="ec.edu.upse.taximetro_app.Menu_ConsultasActivity"
-            android:label="@string/title_activity_menu__consultas" >
+            android:label="@string/carreras_realizadas" >
         </activity>
         <activity
             android:name="ec.edu.upse.taximetro_app.TablaANTActivity"
@@ -109,8 +109,14 @@
             android:name="ec.edu.upse.taximetro_app.ItemCarreraActivity"
             android:label="@string/title_activity_item_carrera" >
         </activity>
-        <activity android:name="ec.edu.upse.taximetro_app.DetalleCarreraActivity"
-            android:label="@string/app_name"></activity>
+        <activity
+            android:name="ec.edu.upse.taximetro_app.DetalleCarreraActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="ec.edu.upse.taximetro_app.Custom_dialog"
+            android:label="@string/title_activity_custom_dialog" >
+        </activity>
     </application>
 
 </manifest>
