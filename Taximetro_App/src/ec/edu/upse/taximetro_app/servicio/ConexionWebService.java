@@ -5,9 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 public class ConexionWebService {
-	private static final String URL_Registrar = "http://172.18.1.183:8080/WebServiceSAAP/services/RegistrarCarreras";
+	private static final String URL_Registrar = "http://192.168.0.100:8080/WebServiceSAAP/services/RegistrarCarreras";
 	private static final String NAMESPACE="http://funciones.servicios.com/";
-	private static final String URL_Consultar = "http://172.18.1.183:8080/WebServiceSAAP/services/ConsultarCarreras";
+	private static final String URL_Consultar = "http://192.168.0.100:8080/WebServiceSAAP/services/ConsultarCarreras";
 	
 	public static String getUrlRegistrar() {
 		return URL_Registrar;

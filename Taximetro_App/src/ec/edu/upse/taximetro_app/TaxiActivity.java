@@ -344,7 +344,7 @@ DecimalFormat df = new DecimalFormat("#.##");
 					metros_comparacion = 33; //metros
 				}
 					// preguntar si la velocidad es mayor o igual de 12km/h = 3.333 m/seg
-					if(velocidad >= cambio_velocidad){
+					if(velocidad > cambio_velocidad){
 						//el costo de la carrera se calcula por la distancia recorrida
 						if(distancia_total == metros_comparacion || distancia_total%metros_comparacion == 0){
 							costoTotalCarrera += 0.01;
@@ -358,7 +358,7 @@ DecimalFormat df = new DecimalFormat("#.##");
 						int segundos_i = Integer.valueOf(tiempo_i.substring(3,4));
 						total_segundos_i = (minutos_i * 60) + segundos_i;
 						
-						if(total_segundos == 10 || total_segundos_i%10 == 0){
+						if(total_segundos_i%10 == 0){
 							costoTotalCarrera += 0.01;
 						}
 					}

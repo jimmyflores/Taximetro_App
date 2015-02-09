@@ -9,7 +9,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ec.edu.upse.taximetro_app.modelo.DBTaximetro;
-import ec.edu.upse.taximetro_app.servicio.ConexionWebService;
 import ec.edu.upse.taximetro_app.utiles.ItemCarrera;
 
 
@@ -30,56 +29,64 @@ import android.widget.Toast;
 
 public class DetalleCarreraActivity extends Activity implements 
 LocationListener{
+	
 	GoogleMap mapa;
 	Location location;
 	LocationManager locationManager;
 	String proveedor,ruta;
 	Integer car;
 	String nombre,apellido,origen,destino,km,costo,fecha;
-	String latitud,longitud,lat_dest,long_dest;
+	Double latitud=0.0,longitud=0.0,lat_dest=0.0,long_dest=0.0;
 	
-
+	//textview
+	TextView textviewOrigen, textviewNombre, textviewApellido;
+	TextView textviewDestino, textviewKm , textviewCosto ,textviewFecha;
+	
+	public void inicializar(){
+		textviewOrigen = (TextView) findViewById(R.id.textView01);
+		textviewNombre = (TextView) findViewById(R.id.textViewNombresD);
+		textviewApellido = (TextView) findViewById(R.id.textViewApellidosD);
+		textviewDestino = (TextView) findViewById(R.id.textViewD2);
+		textviewKm = (TextView) findViewById(R.id.textViewKm2);
+		textviewCosto = (TextView) findViewById(R.id.textViewCosto2);
+		textviewFecha = (TextView) findViewById(R.id.textViewFe);
+		mapa = ((MapFragment) getFragmentManager().findFragmentById(R.id.fragmentMapaD)).getMap();
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalle_carrera);
-		
-		try {
-			Intent intent = this.getIntent();
-			car = Integer.parseInt(intent.getStringExtra("carrera"));
-			nombre=intent.getStringExtra("nombre");
-			apellido=intent.getStringExtra("apellido");
-			origen=intent.getStringExtra("origen");
-			destino=intent.getStringExtra("destino");
-			km=intent.getStringExtra("km");
-			costo=intent.getStringExtra("costo");
-			fecha=intent.getStringExtra("fecha");
-			System.out.println("!!!localizacion: Lat,long = "+latitud.toString()+","+longitud.toString());
-			latitud = intent.getStringExtra("lat");
-			longitud =intent.getStringExtra("long");
-			lat_dest = intent.getStringExtra("latdest");
-			long_dest = intent.getStringExtra("longdest");
-			System.out.println("!!!localizacion: Lat,long = "+latitud.toString()+","+longitud.toString());
-			
-					} catch (Exception e) {
-			e.printStackTrace();
-		}
-	
-		TextView textviewOrigen = (TextView) findViewById(R.id.textView01);
-		TextView textviewNombre = (TextView) findViewById(R.id.textViewNombresD);
-		TextView textviewApellido = (TextView) findViewById(R.id.textViewApellidosD);
-		TextView textviewDestino = (TextView) findViewById(R.id.textViewD2);
-		TextView textviewKm = (TextView) findViewById(R.id.textViewKm2);
-		TextView textviewCosto = (TextView) findViewById(R.id.textViewCosto2);
-		TextView textviewFecha = (TextView) findViewById(R.id.textViewFe);
-		
+		inicializar();
+		if(mapa==null){
+			Toast.makeText(this, "no se pudo crear mapa",
+			Toast.LENGTH_LONG).show();
+		}else{
+			try 
+			{
+				Intent intent = this.getIntent();
+				car = Integer.parseInt(intent.getStringExtra("carrera"));
+				nombre=intent.getStringExtra("nombre");
+				apellido=intent.getStringExtra("apellido");
+				origen=intent.getStringExtra("origen");
+				destino=intent.getStringExtra("destino");
+				km=intent.getStringExtra("km");
+				costo=intent.getStringExtra("costo");
+				fecha=intent.getStringExtra("fecha");
+				latitud=Double.parseDouble(intent.getStringExtra("latitud"));
+				longitud=Double.parseDouble(intent.getStringExtra("longitud"));
+				lat_dest=Double.parseDouble(intent.getStringExtra("latdest"));
+				long_dest=Double.parseDouble(intent.getStringExtra("longdest"));
+			} 
+			catch (Exception e) {
+				// TODO: handle exception
+			}
 		
 		Intent intent = this.getIntent();
-		if(!ConexionWebService.VerificaConexion(this))
-		{
+		
 			DBTaximetro dbTaximetro = new DBTaximetro();
 			ItemCarrera cl= dbTaximetro.Buscar(this, car);
-		
+			if(cl!=null){
 			textviewApellido.setText(cl.getApellido());
 			textviewNombre.setText(cl.getNombre());
 			textviewOrigen.setText(cl.getOrigen());
@@ -88,14 +95,8 @@ LocationListener{
 			textviewCosto.setText(cl.getCosto().toString());
 			textviewFecha.setText(cl.getFecha());
 		
-			mapa = ((MapFragment)
-				getFragmentManager().findFragmentById(R.id.fragmentMapaD)).getMap();
-					
 					// comprobacion
-					if(mapa==null){
-						Toast.makeText(this, "no se pudo crear mapa",
-						Toast.LENGTH_LONG).show();
-					}else{
+					if(mapa != null){
 						// configuraciones iniciales del mapa
 						mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 						mapa.getUiSettings().setZoomControlsEnabled(true);
@@ -105,25 +106,20 @@ LocationListener{
 								"Origen", "Direccion de Origen");
 						agregarMarca(cl.getLatitud_destino(), cl.getLongitud_destino(),
 								"Destino", "Direccion de Destino");
-						
-						
 					}
 		//agregarMarca(cl.getLatitud(), cl.getLongitud(), "ubica", 
 			//	 "Ubicacion actual");*/
-		}
-		else
-		{
-			textviewApellido.setText(apellido);
-			textviewNombre.setText(nombre);
-			textviewOrigen.setText(origen);
-			textviewDestino.setText(destino);
-			textviewKm.setText(km);
-			textviewCosto.setText(costo);
-			textviewFecha.setText(fecha);
-			mapa = ((MapFragment)
-					getFragmentManager().findFragmentById(R.id.fragmentMapaD)).getMap();
-						
-						// comprobacion
+	
+		
+		}else{
+				textviewApellido.setText(apellido);
+				textviewNombre.setText(nombre);
+				textviewOrigen.setText(origen);
+				textviewDestino.setText(destino);
+				textviewKm.setText(km);
+				textviewCosto.setText(costo);
+				textviewFecha.setText(fecha);
+				// comprobacion
 						if(mapa==null){
 							Toast.makeText(this, "no se pudo crear mapa",
 							Toast.LENGTH_LONG).show();
@@ -132,15 +128,13 @@ LocationListener{
 							mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 							mapa.getUiSettings().setZoomControlsEnabled(true);
 							mapa.getUiSettings().setCompassEnabled(true);
-							Double latitud_i = Double.parseDouble(latitud);
-							Double longitud_i = Double.parseDouble(longitud); 
-							agregarMarca(latitud_i,longitud_i,
-									"Origen", "Direccion de Origen");
-							agregarMarca(Double.parseDouble(lat_dest),Double.parseDouble(long_dest),
-									"Destino", "Direccion de Destino");
-								
 							
-						}
+							agregarMarca(latitud,longitud,
+									"Origen", "Direccion de Origen");
+							agregarMarca(lat_dest,long_dest,
+									"Destino", "Direccion de Destino");			
+			}
+		}
 		}
 	}
 
@@ -160,7 +154,7 @@ LocationListener{
 		marca.position(ubicacion);
 		marca.title(titulo);
 		marca.icon(BitmapDescriptorFactory.fromResource(
-			R.drawable.ic_marca));
+				R.drawable.ic_marca));
 		
 		marca.snippet(mensaje);
 		// agregar la marca al mapa
@@ -192,5 +186,21 @@ LocationListener{
 		// TODO Auto-generated method stub
 		
 	}
-	
+	public static boolean verificarConexion(Context ctx)
+	{
+		boolean bConectado =false;
+			ConnectivityManager connec = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+			//no solo wifi, tambien GPRS
+			NetworkInfo[] redes = connec.getAllNetworkInfo();
+			for(int i =0; i<2; i++)
+			{
+				if(redes[i].getState()==NetworkInfo.State.CONNECTED)
+				{
+					bConectado=true;
+				}
+			}
+			
+		return bConectado;
+		
+	}
 }

@@ -72,7 +72,7 @@ public class ConsultasActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_consultas);
+		setContentView(R.layout.activity_consultas);
 		Intent intentActual = this.getIntent();
 		final Calendar c_desde = Calendar.getInstance();
 		mYear_d = c_desde.get(Calendar.YEAR);
@@ -83,13 +83,17 @@ public class ConsultasActivity extends Activity {
 		mMonth_h = c_hasta.get(Calendar.MONTH);
 		mDay_h = c_hasta.get(Calendar.DAY_OF_MONTH);
 		
+		Inicializar();
+		buttonHasta.setText(fecha(mDay_h,mMonth_h,mYear_h));	
+		buttonDesde.setText(fecha(mDay_d,mMonth_d,mYear_d));	
 		try {
-			if(!verificarConexion(this))
+			if(!ConexionWebService.VerificaConexion(this))
 			{
 				id_usuario = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
 				nombre_usuario = intentActual.getStringExtra("nombre_usuario");
 				DBTaximetro dbTaxi = new DBTaximetro();
 				Usuario user = dbTaxi.ListaUsuario(this, nombre_usuario);
+				
 				if (user == null)
 				{
 					Toast.makeText(this, "El Usuario no se encuentra registrado localmente active el servicio de internet", Toast.LENGTH_LONG).show();
@@ -107,11 +111,26 @@ public class ConsultasActivity extends Activity {
 		e.printStackTrace();
 		}
 		
-		Inicializar();
-		updateDisplayDesde();
-		updateDisplayHasta();
 	}
      
+	public String fecha(Integer p_dia, Integer p_mes, Integer p_año){
+		String fecha = "";
+		String dia="", mes="";
+		if(p_mes+1 >=1 && p_mes+1 <=9){
+			mes = "0"+(p_mes +1);
+		}else{
+			mes = ""+(p_mes +1);
+		}
+		
+		if(p_dia>=1 && p_dia <=9){
+			dia = "0"+(p_dia);
+		}else{
+			dia = ""+(p_dia);
+		}
+		fecha= dia+"/"+mes+"/"+p_año;
+
+		return fecha;
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -125,7 +144,6 @@ public class ConsultasActivity extends Activity {
 		total = (TextView) findViewById(R.id.textViewVTCarreras);
 		buttonDesde = (Button) findViewById(R.id.buttonDesde);
 		buttonHasta = (Button) findViewById(R.id.buttonHasta);
-		
  	}
 	
 	public void onFechaDesde(View v){
@@ -134,7 +152,7 @@ public class ConsultasActivity extends Activity {
 		final DatePicker fecha_inicio = (DatePicker) vista.findViewById(R.id.datePicker1);
 		
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		//alert.setView(vista);
+		alert.setView(vista);
 		alert.setPositiveButton("ok", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
@@ -163,72 +181,37 @@ public class ConsultasActivity extends Activity {
 		alert.show();
 	}
 	
-	
-	public String fecha(Integer p_dia, Integer p_mes, Integer p_año){
-		String fecha = "";
-		String dia="", mes="";
-		if(p_mes+1 >=1 && p_mes+1 <=9){
-			mes = "0"+(p_mes +1);
-		}else{
-			mes = ""+(p_mes +1);
-		}
-		
-		if(p_dia>=1 && p_dia <=9){
-			dia = "0"+(p_dia);
-		}else{
-			dia = ""+(p_dia);
-		}
-		fecha= dia+"/"+mes+"/"+p_año;
-
-		return fecha;
-	}
-	
-	
-	
 	public void onBuscar(View Button){
-		lista = (ListView)findViewById(R.id.listViewConsulta);
-		if(verificarConexion(this)){
-			String fecha_desde = buttonDesde.getText().toString();
-			String fecha_hasta = buttonHasta.getText().toString();
-			System.out.println(""+fecha_desde+" "+ fecha_hasta+" "+nombre_usuario);
-			ArrayList<ItemConsulta> listarCarrera = consulta_fechas(fecha_desde, fecha_hasta, nombre_usuario);
+		Inicializar();
+		
+		String fecha_desde = buttonDesde.getText().toString();
+		String fecha_hasta = buttonHasta.getText().toString();
+		DBTaximetro dbTaximetro = new DBTaximetro();
+		
+		ArrayList<ItemConsulta> listarCarrera = dbTaximetro.BuscarPorFecha(this,id_usuario, fecha_desde, fecha_hasta);
+		if(listarCarrera!=null){
 			CustomListViewAdapterConsulta customAdapter = new CustomListViewAdapterConsulta(this, R.layout.activity_item__result, listarCarrera);
 			lista.setAdapter(customAdapter); 
-			
-			num_carrera.setText(" "+numeroCarrerasWS);
-			total.setText(" $ "+precioTotalCWS);
-		}else{
-			String fecha_desde = buttonDesde.getText().toString();
-			String fecha_hasta = buttonHasta.getText().toString();
-			DBTaximetro dbTaximetro = new DBTaximetro();
-			
-			ArrayList<ItemConsulta> listarCarrera = dbTaximetro.BuscarPorFecha(this,id_usuario, fecha_desde, fecha_hasta);
-			CustomListViewAdapterConsulta customAdapter = new CustomListViewAdapterConsulta(this, R.layout.activity_item__result, listarCarrera);
-			lista.setAdapter(customAdapter); 
-			
 			num_carrera.setText(" "+dbTaximetro.numero_de_carreras(this, id_usuario, fecha_desde, fecha_hasta));
 			total.setText(" $ "+dbTaximetro.valor_total(this, id_usuario, fecha_desde, fecha_hasta));
+		}else{	
+			ArrayList<ItemConsulta> listarCarrera1 = consulta_fechas(fecha_desde, fecha_hasta, nombre_usuario);
+			if(ConexionWebService.VerificaConexion(this)){
+				if (listarCarrera1 != null){
+					CustomListViewAdapterConsulta customAdapter = new CustomListViewAdapterConsulta(this, R.layout.activity_item__result, listarCarrera1);
+					lista.setAdapter(customAdapter); 
+					num_carrera.setText(" "+numeroCarrerasWS);
+					total.setText(" $ "+precioTotalCWS);
+				}else{
+					
+				}
+				
+			}
 		}
 	}
 	
 	public void onRegresar(View boton){
 		this.finish();
-	}
-	public static boolean verificarConexion(Context ctx)
-	{
-		boolean bConectado =false;
-			ConnectivityManager connec = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-			//no solo wifi, tambien GPRS
-			NetworkInfo[] redes = connec.getAllNetworkInfo();
-			for(int i =0; i<2; i++)
-			{
-				if(redes[i].getState()==NetworkInfo.State.CONNECTED)
-				{
-					bConectado=true;
-				}
-			}
-			
-		return bConectado;
 	}
 
 	private ArrayList<ItemConsulta> consulta_fechas(String desde, String hasta, String usuario)
@@ -320,68 +303,10 @@ public class ConsultasActivity extends Activity {
 		}else{
 			dia_d = ""+(mDay_d);
 		}
+		
 		buttonDesde.setText(new StringBuilder()
 					.append(dia_d).append("/")
 					.append(mes_d).append("/")
 					.append(mYear_d).append(""));
-	}
-	
-	private void updateDisplayHasta(){
-		if(mMonth_h+1 >=1 && mMonth_h+1 <=9){
-			mes_h = "0"+(mMonth_h+1);
-		}else{
-			mes_h = ""+(mMonth_h +1);
-		}
-		
-		if(mDay_h>=1 && mDay_h<=9){
-			dia_h = "0"+(mDay_h);
-		}else{
-			dia_h = ""+(mDay_h);
-		}
-		
-		buttonHasta.setText(new StringBuilder()
-					.append(dia_h).append("/")
-					.append(mes_h).append("/")
-					.append(mYear_h).append(""));
-	}
-	
-	private DatePickerDialog.OnDateSetListener mDateSetListenerDesde = new DatePickerDialog.OnDateSetListener(){
-		@Override
-		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-			mYear_d = year;
-			mMonth_d = monthOfYear;
-			mDay_d = dayOfMonth;
-					updateDisplayDesde();
-		}};
-		
-		private DatePickerDialog.OnDateSetListener mDateSetListenerHasta = new DatePickerDialog.OnDateSetListener(){
-			@Override
-			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				mYear_h = year;
-				mMonth_h = monthOfYear;
-				mDay_h = dayOfMonth;
-						updateDisplayHasta();
-			}};
-		
-	protected Dialog onCreateDialog(int id){
-		switch(id){
-		case DATE_DIALOG_ID_DESDE:
-			return new DatePickerDialog(this, mDateSetListenerDesde, mYear_d, mMonth_d, mDay_d);
-		case DATE_DIALOG_ID_HASTA:
-			return new DatePickerDialog(this, mDateSetListenerHasta, mYear_h, mMonth_h, mDay_h);
-		}
-		
-		return null;
-	}
-	
-	
-	@SuppressWarnings("deprecation")
-	public void CalendarioDesde(View v){
-		showDialog(DATE_DIALOG_ID_DESDE);
-	}
-	
-	@SuppressWarnings("deprecation")
-	public void CalendarioHasta(View v){
-		showDialog(DATE_DIALOG_ID_HASTA);
 	}
 }

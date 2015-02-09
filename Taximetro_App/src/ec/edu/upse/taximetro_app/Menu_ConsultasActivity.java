@@ -23,12 +23,13 @@ public class Menu_ConsultasActivity extends Activity {
 	setContentView(R.layout.activity_menu__consultas);
 		try {
 			Intent intent = this.getIntent();
+			id_usuario = Integer.parseInt(intent.getStringExtra("id_usuario"));
+			nombre_usuario = intent.getStringExtra("usuario");
+			online = intent.getStringExtra("online");
 			
 			if(!ConexionWebService.VerificaConexion(this))
 			{
-				id_usuario = Integer.parseInt(intent.getStringExtra("id_usuario"));
-				nombre_usuario = intent.getStringExtra("usuario");
-				online = intent.getStringExtra("online");
+				
 				
 				DBTaximetro dbTaxi = new DBTaximetro();
 				Usuario user = dbTaxi.ListaUsuario(this, nombre_usuario);
@@ -40,13 +41,7 @@ public class Menu_ConsultasActivity extends Activity {
 					startActivity(intents);
 				}
 			}
-			else
-			{
-				Intent intente = this.getIntent();
-				id_usuario = Integer.parseInt(intente.getStringExtra("id_usuario"));
-				nombre_usuario = intente.getStringExtra("usuario");
-				nombre_usuario = intente.getStringExtra("online");
-			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -106,7 +101,7 @@ public class Menu_ConsultasActivity extends Activity {
 	public void onCarreras(View boton){
 		Intent intent =new Intent(this,TablaCarrerasActivity.class);
 		intent.putExtra("id_usuario", ""+id_usuario);
-		intent.putExtra("usuario", nombre_usuario);
+		intent.putExtra("nombre_usuario", nombre_usuario);
 		startActivity(intent);
 		
 	}

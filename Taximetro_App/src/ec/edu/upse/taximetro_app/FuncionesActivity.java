@@ -20,9 +20,9 @@ public class FuncionesActivity extends Activity {
 		
 		Intent intentActual = this.getIntent();
 		try {
-		id = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
-		nombre_usuario = intentActual.getStringExtra("usuario");
-		online = intentActual.getStringExtra("online");
+			id = Integer.parseInt(intentActual.getStringExtra("id_usuario"));
+			nombre_usuario = intentActual.getStringExtra("usuario");
+			online = intentActual.getStringExtra("online");
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
